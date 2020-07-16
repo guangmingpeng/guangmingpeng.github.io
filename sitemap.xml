@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://abulading.cn/2020/05/17/firstblog/</loc>
+    
+    <lastmod>2020-07-16T14:35:49.768Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://abulading.cn/404.html</loc>
     
     <lastmod>2020-07-16T14:06:18.310Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://abulading.cn/categories/index.html</loc>
     
     <lastmod>2020-07-16T13:59:18.859Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://abulading.cn/2020/05/17/firstblog/</loc>
-    
-    <lastmod>2020-07-16T01:38:44.028Z</lastmod>
     
   </url>
   
