@@ -4,11 +4,24 @@
   
     
     <entry>
+      <title>浅谈Activity</title>
+      <link href="/2020/07/16/qian-tan-activity/"/>
+      <url>/2020/07/16/qian-tan-activity/</url>
+      
+        <content type="html"><![CDATA[<script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>开门第一话</title>
       <link href="/2020/05/17/firstblog/"/>
       <url>/2020/05/17/firstblog/</url>
       
-        <content type="html"><![CDATA[<pre><code>有自己的空间是件有意思的事情。做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？得先知道自己能做出什么事情，才能知道有什么事情交给别人做，毫无疑问，知道自己什究竟能做什么是件很难的事情，但我大致想好了。想学好技术，少不了有很多东西要积累的，自己也方便回头看看。我其实能想象得到，每过一段时间回头看，都会发现自己以前的愚蠢与浅薄。但假如真的能做到这样，说明我还是有所进步的，否认以前的自己并不完全是件坏事。身上的烟火气息提醒我，平日里的嬉笑怒骂，柴米油盐同样珍贵，或许哪天是一则游记，或许是一个菜谱，或许是一个笑话，或奇闻，或五行八卦阴阳异术……还是回到之前的问题：我到底会什么？“you know nothing”---- Ygritte</code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+        <content type="html"><![CDATA[<p>有自己的空间是件有意思的事情。</p><p>做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？得先知道自己能做出什么事情，才能知道有什么事情交给别人做，毫无疑问，知道自己什究竟能做什么是件很难的事情，但我大致想好了。</p><p>学好技术，少不了有很多东西要积累的，自己也方便回头看看。我其实能想象得到，每过一段时间回头看，都会发现自己以前的愚蠢与浅薄。但假如真的能做到这样，说明我还是有所进步的，否认以前的自己并不完全是件坏事。</p><p>身上的烟火气息提醒我，平日里的嬉笑怒骂，柴米油盐同样珍贵，或许哪天是一则游记，或许是一个菜谱，或许是一个笑话，或奇闻，或五行八卦阴阳异术……还是回到之前的问题：我到底会什么？</p><pre><code>“you know nothing”---- Ygritte</code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
       
