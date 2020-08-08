@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>设计模式之观察者模式</title>
+      <link href="/2020/08/08/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/"/>
+      <url>/2020/08/08/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/</url>
+      
+        <content type="html"><![CDATA[<script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>浅谈Activity</title>
       <link href="/2020/07/16/qian-tan-activity/"/>
       <url>/2020/07/16/qian-tan-activity/</url>
