@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://abulading.cn/"/>
-  <updated>2020-08-08T14:08:31.310Z</updated>
+  <updated>2020-08-08T14:51:55.565Z</updated>
   <id>http://abulading.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://abulading.cn/2020/08/08/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/"/>
     <id>http://abulading.cn/2020/08/08/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/</id>
     <published>2020-08-08T14:08:31.000Z</published>
-    <updated>2020-08-08T14:08:31.310Z</updated>
+    <updated>2020-08-08T14:51:55.565Z</updated>
     
     <summary type="html">
     
@@ -29,11 +29,7 @@
       
         
         
-          &lt;script&gt;
-        document.querySelectorAll(&#39;.github-emoji&#39;)
-          .forEach(el =&gt; {
-            if (!el.dataset.src) { return; }
-       
+          &lt;h1 id=&quot;设计模式之观察者模式&quot;&gt;&lt;a href=&quot;#设计模式之观察者模式&quot; class=&quot;headerlink&quot;
         
       
     
