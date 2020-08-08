@@ -518,33 +518,20 @@ class ConcreteObserver2 implements Observer {
      sub.addObserver(new ConcreteObserver2()); //添加观察者2
      sub.doSomething();
  }
-}</code></pre><p>输出</p>
-<pre><code>被观察者事件发生改变
-</code></pre></li>
+}</code></pre></li>
 </ol>
-<p>观察者1收到信息，并进行处理</p>
-<p>观察者2收到信息，并进行处理复制代码</p>
-<pre><code>通过运行结果可以看到，我们只调用了 Subject 的方法，但同时两个观察者的相关方法都被调用了。仔细看一下代码，其实很简单，就是在 Subject 类中关联一下 Observer 类，并且在 doSomething() 方法中遍历一下 Observer 的 update() 方法就行了。
-
-
-#### 优缺点
-**优点**
-
-降低了目标与观察者之间的耦合关系，两者之间是抽象耦合关系
-目标与观察者之间建立了一套触发机制
-支持广播通信
-符合“开闭原则”的要求
-
-**缺点**
-
-目标与观察者之间的依赖关系并没有完全解除，而且有可能出现循环引用
-当观察者对象很多时，通知的发布会花费很多时间，影响程序的效率
-
-**应用**
-
-JDK中的观察者模式
-观察者模式在 Java 语言中的地位非常重要。在 JDK 的 java.util 包中，提供了 Observable 类以及 Observer 接口，它们构成了 JDK 对观察者模式的支持（可以去查看下源码，写的比较严谨）。but，在 Java9 被弃用了。
-</code></pre><script>
+<p>输出</p>
+<p><em>被观察者事件发生改变</em></p>
+<p><em>观察者1收到信息，并进行处理</em></p>
+<p><em>观察者2收到信息，并进行处理复制代码</em></p>
+<p>通过运行结果可以看到，我们只调用了 Subject 的方法，但同时两个观察者的相关方法都被调用了。仔细看一下代码，其实很简单，就是在 Subject 类中关联一下 Observer 类，并且在 doSomething() 方法中遍历一下 Observer 的 update() 方法就行了。</p>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><p><strong>优点</strong></p>
+<p>降低了目标与观察者之间的耦合关系，两者之间是抽象耦合关系<br>目标与观察者之间建立了一套触发机制<br>支持广播通信<br>符合“开闭原则”的要求</p>
+<p><strong>缺点</strong></p>
+<p>目标与观察者之间的依赖关系并没有完全解除，而且有可能出现循环引用<br>当观察者对象很多时，通知的发布会花费很多时间，影响程序的效率</p>
+<p><strong>应用</strong></p>
+<p>JDK中的观察者模式<br>观察者模式在 Java 语言中的地位非常重要。在 JDK 的 java.util 包中，提供了 Observable 类以及 Observer 接口，它们构成了 JDK 对观察者模式的支持（可以去查看下源码，写的比较严谨）。but，在 Java9 被弃用了。</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
