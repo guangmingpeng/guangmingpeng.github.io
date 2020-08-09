@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SpringMVC 中的中文乱码问题, a~bulading">
+    <meta name="keywords" content="设计模式之建造者模式, a~bulading">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SpringMVC 中的中文乱码问题 | a~bulading</title>
+    <title>设计模式之建造者模式 | a~bulading</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SpringMVC 中的中文乱码问题</h1>
+                    <h1 class="description center-align post-title">设计模式之建造者模式</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-09
+                    2020-07-01
                 </div>
                 
 
@@ -459,87 +459,138 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SpringMVC-中的中文乱码问题"><a href="#SpringMVC-中的中文乱码问题" class="headerlink" title="SpringMVC 中的中文乱码问题"></a>SpringMVC 中的中文乱码问题</h1><p>在前段时间玩的一个SSM项目中，遇到了不少中文乱码的问题，经常读出的数据变成了“？？？”，我也是一脸 ？？？，现在做个小记录。</p>
-<p>其实除了在SpringMVC中有中文乱码的问题，在MyBatis中同样存在，一般是编码方式不统一导致的，大部分可以通过配置文件去解决，至于不能解决的那部分，只是我还没碰到罢了。</p>
-<h3 id="分门别类："><a href="#分门别类：" class="headerlink" title="分门别类："></a>分门别类：</h3><h4 id="1-要在web-xm中配置拦截器"><a href="#1-要在web-xm中配置拦截器" class="headerlink" title="1. 要在web.xm中配置拦截器"></a>1. 要在web.xm中配置拦截器</h4><p>注意web.xml的配置要遵守一定的顺叙,一个样例如下：</p>
-<pre><code>&lt;!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
-&lt;web-app&gt;
-  &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
-</code></pre><p> 配置路径，以使得监听器能去加载spring的配置文件applicationContext,配置好之后，就能在**tController类中使用依赖注入了</p>
-<pre><code>  &lt;context-param&gt;
-    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
-  &lt;/context-param&gt;
+                <h1 id="设计模式之建造者模式"><a href="#设计模式之建造者模式" class="headerlink" title="设计模式之建造者模式"></a>设计模式之建造者模式</h1><p>在java中实例化某个类的对象时，我们会经常碰到 <em>**bulider</em> 这样的形式，这其实是使用的就是建造者模式。但是为什么不直接用普通的方法去实例化，而要这么绕一下呢？这种情况我觉得在设计模式中经常遇到，比如工厂模式也是如此，代理模式也是如此，总的来说，这样的看似“多余”的做法，其实是在设计原则的指导下而形成的。一般来说，当一个类的构造函数参数个数较多，而且这些参数有些是可选的参数，就可以考虑使用建造者模式。</p>
+<p>我们先从一个例子说起。</p>
+<p>例如我们现在有如下一个类计算机类Computer，其中cpu与ram是必填参数，而其他3个是可选参数，那么我们如何构造这个类的实例呢,通常有两种常用的方式：</p>
+<pre><code>public class Computer {
+    private String cpu;//必须
+    private String ram;//必须
+    private int usbCount;//可选
+    private String keyboard;//可选
+    private String display;//可选
+}</code></pre><p>第一：折叠构造函数模式（telescoping constructor pattern ），这个我们经常用,如下代码所示</p>
+<pre><code>public class Computer {
+     ...
+    public Computer(String cpu, String ram) {
+        this(cpu, ram, 0);
+    }
+    public Computer(String cpu, String ram, int usbCount) {
+        this(cpu, ram, usbCount, "罗技键盘");
+    }
+    public Computer(String cpu, String ram, int usbCount, String keyboard) {
+        this(cpu, ram, usbCount, keyboard, "三星显示器");
+    }
+    public Computer(String cpu, String ram, int usbCount, String keyboard, String display) {
+        this.cpu = cpu;
+        this.ram = ram;
+        this.usbCount = usbCount;
+        this.keyboard = keyboard;
+        this.display = display;
+    }
+}</code></pre><p>第二种：Javabean 模式，如下所示</p>
+<pre><code>public class Computer {
+        ...
 
+    public String getCpu() {
+        return cpu;
+    }
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
+    }
+    public String getRam() {
+        return ram;
+    }
+    public void setRam(String ram) {
+        this.ram = ram;
+    }
+    public int getUsbCount() {
+        return usbCount;
+    }
+...
+}</code></pre><p>那么这两种方式有什么弊端呢？ 第一种主要是使用及阅读不方便。你可以想象一下，当你要调用一个类的构造函数时，你首先要决定使用哪一个，然后里面又是一堆参数，如果这些参数的类型很多又都一样，你还要搞清楚这些参数的含义，很容易就传混了。。。那酸爽谁用谁知道。 第二种方式在构建过程中对象的状态容易发生变化，造成错误。因为那个类中的属性是分步设置的，所以就容易出错。<br>为了解决这两个痛点，builder模式就横空出世了。</p>
+<h3 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h3><ul>
+<li><p>在Computer 中创建一个静态内部类 Builder，然后将Computer 中的参数都复制到Builder类中。</p>
+</li>
+<li><p>在Computer中创建一个private的构造函数，参数为Builder类型</p>
+</li>
+<li><p>在Builder中创建一个public的构造函数，参数为Computer中必填的那些参数，cpu 和ram。</p>
+</li>
+<li><p>在Builder中创建设置函数，对Computer中那些可选参数进行赋值，返回值为Builder类型的实例</p>
+</li>
+<li><p>在Builder中创建一个build()方法，在其中构建Computer的实例并返回<br>下面代码就是最终的样子</p>
+<pre><code>public class Computer {
+  private final String cpu;//必须
+  private final String ram;//必须
+  private final int usbCount;//可选
+  private final String keyboard;//可选
+  private final String display;//可选
 
-  &lt;!--解决中文乱码的问题，设置过滤器--&gt;
-  &lt;filter&gt;
-    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
-    &lt;!--设定编码集--&gt;
-    &lt;init-param&gt;
-      &lt;param-name&gt;encoding&lt;/param-name&gt;
-      &lt;param-value&gt;UTF-8&lt;/param-value&gt;
-    &lt;/init-param&gt;
-  &lt;/filter&gt;
+  private Computer(Builder builder){
+      this.cpu=builder.cpu;
+      this.ram=builder.ram;
+      this.usbCount=builder.usbCount;
+      this.keyboard=builder.keyboard;
+      this.display=builder.display;
+  }
+  public static class Builder{
+      private String cpu;//必须
+      private String ram;//必须
+      private int usbCount;//可选
+      private String keyboard;//可选
+      private String display;//可选
 
-  &lt;!--设置该字符过滤器要拦截的内容--&gt;
-  &lt;filter-mapping&gt;
-    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
-    &lt;!--表示所有的内容都被此过滤器拦截--&gt;
-    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-  &lt;/filter-mapping&gt;</code></pre><p> 配置监听器，因为启动服务器后，加载web.xml文件，根据此文件加载springMVC的配置文件，而没有去加载spring的配置文件，<br>  所以需要设置此监听器，当服务器启动开始加载servletContext对象时，也去加载spring的配置文件<br> 但该监听器 默认只加载WEB-INF目录下的applicationContext.xml配置文件，所以下面还需要配置其路径</p>
-<pre><code>&lt;listener&gt;
-  &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
-&lt;/listener&gt;
+      public Builder(String cup,String ram){
+          this.cpu=cup;
+          this.ram=ram;
+      }
 
-
-  &lt;!--这里是配置前端控制器--&gt;
-  &lt;!--希望做的是 1.加载springMVC.xml配置文件
-  &lt;
-                1. 启动服务器，就创建该servlet--&gt;
- &lt;servlet&gt;
-   &lt;servlet-name&gt;dispatchServlet&lt;/servlet-name&gt;
-   &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-   &lt;!--加载springMVC配置文件，springMVC.xml配置文件在resources目录下进行创建，
-   创建的方法是：右键resources-&gt;new-&gt;选择xml configuration File-&gt;选择Spring config-&gt;命名为springMVC.xml--&gt;
-   &lt;init-param&gt;
-     &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-     &lt;param-value&gt;classpath:springMVC.xml&lt;/param-value&gt;
-   &lt;/init-param&gt;
-   &lt;!--启动服务器，创建该servlet--&gt;
-   &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
- &lt;/servlet&gt;
-&lt;servlet-mapping&gt;
-  &lt;servlet-name&gt;dispatchServlet&lt;/servlet-name&gt;
-  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-&lt;/web-app&gt;
-</code></pre><h4 id="2-数据库的编码方式"><a href="#2-数据库的编码方式" class="headerlink" title="2. 数据库的编码方式"></a>2. 数据库的编码方式</h4><p>(一)：数据库端字符集设置</p>
-<p>　　1. 安装mysql时，会有一个数据库编码设置，将其设置为utf-8</p>
-<p>　　2. 先设置数据库的字符集属性；</p>
-<p>　　3. 将要显示中文的字段设置为UTF-8</p>
-<p>springMVC项目，存中文到mysql是乱码（?????）<br>问题：jdbc连接mysql数据库，web页面输入的中文，存到数据库却变成”？？？？”；</p>
-<p>　　但是数据库中的中文却能够正常读出并在页面显示<br>mysql中运行 ：SHOW VARIABLES LIKE ‘char%’</p>
-<p>发现唯一一个不是utf8的是character_set_server这个参数。</p>
-<p>在my.cnf中，mysqld下添加“character-set-server=utf8”</p>
-<p>重启mysql后，问题解决。</p>
-<h4 id="3-检查Spring的配置文件"><a href="#3-检查Spring的配置文件" class="headerlink" title="3. 检查Spring的配置文件"></a>3. 检查Spring的配置文件</h4><p>如果web.xml和数据库的编码格式都设置为了utf8，仍存到数据库之后为乱码<br>则有可能是传输的时候出现了问题，所以继续检查spring的配置文件applicationContext.xml中，配置连接池时，url配置是否加上了编码方式，如下：</p>
-<p>这时spring配置中整合spring与mybatis的其中一段配置，这是配置连接池的，在url后面指定传输时的数据编码格式为utf8</p>
-<pre><code>
- &lt;!--配置连接池--&gt;
-&lt;bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"&gt;
-    &lt;!--配置四个属性--&gt;
-    &lt;property name="driverClass" value="com.mysql.jdbc.Driver"/&gt;
-    &lt;property name="jdbcUrl" value="jdbc:mysql:///ssm?characterEncoding=utf8"/&gt;
-    &lt;property name="user" value="root"/&gt;
-    &lt;property name="password" value=""/&gt;
-&lt;/bean&gt;
-</code></pre><h4 id="4-补充：Mybatis-中的中文乱码"><a href="#4-补充：Mybatis-中的中文乱码" class="headerlink" title="4. 补充：Mybatis 中的中文乱码"></a>4. 补充：Mybatis 中的中文乱码</h4><p>mybatis操作数据的乱码有两种，一是数据库本身插入中文就显示乱码，这个可以通过修改库或者表的编码格式进行修改或者在建表的时候就选择utf8的编码格式。</p>
-<p>第二种是mybatis传入中文数据到数据库，建库时设置了数据库默认字符集为UTF-8，通过mysql workbench直接插入中文显示完全正常。但是使用mybaits插入数据时，中文显示成了”???”这样的乱码。但从数据库获取的中文不会乱码。跟踪数据库操作，SQL语句中的中文还是显示正常的，但是插入到mysql数据库后就乱码了，于是判断可能是数据库连接的问题。后来在网上找了下资料，发现确实可以为mysql数据库的连接字符串设置编码方式，如下：</p>
-<pre><code>jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;amp;characterEncoding=utf8</code></pre><script>
+      public Builder setUsbCount(int usbCount) {
+          this.usbCount = usbCount;
+          return this;
+      }
+      public Builder setKeyboard(String keyboard) {
+          this.keyboard = keyboard;
+          return this;
+      }
+      public Builder setDisplay(String display) {
+          this.display = display;
+          return this;
+      }        
+      public Computer build(){
+          return new Computer(this);
+      }
+  }
+}</code></pre></li>
+</ul>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>在客户端使用链式调用，一步一步的把对象构建出来。</p>
+<pre><code>Computer computer=new Computer.Builder("因特尔","三星")
+                .setDisplay("三星24寸")
+                .setKeyboard("罗技")
+                .setUsbCount(2)
+                .build();</code></pre><h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>构建者模式是一个非常实用而常见的创建类型的模式（creational design pattern)，例如图片处理框架Glide，网络请求框架Retrofit等都使用了此模式。</p>
+<p><strong>扩展</strong></p>
+<p>其实上面的内容是Builder在Java中一种简化的使用方式，经典的Builder 模式与其有一定的不同，如果没有兴趣的同学就可以不用往下读了。</p>
+<h3 id="建造者模式-VS-简单工厂模式"><a href="#建造者模式-VS-简单工厂模式" class="headerlink" title="建造者模式 VS 简单工厂模式"></a>建造者模式 VS 简单工厂模式</h3><p><strong>相似点</strong></p>
+<p>它们都属于创建型模式「都是创建产品的」</p>
+<p><strong>区别</strong></p>
+<ol>
+<li>创建对象的粒度不同<br>工厂模式创建的对象都是一个鸟样子，而建造者模式创建的是一个复合产品，由各个复杂的部件组成，部件不同所构成的产品也不同</li>
+<li>关注点不同：<br>工厂模式注重只要把这个对象创建出来就 o 了「不关心这个产品的组成部分」，而建造者模式不似要创造出这个产品，还有知道这个产品的组成部分</li>
+</ol>
+<h3 id="补充：-静态内部类和非静态内部类区别"><a href="#补充：-静态内部类和非静态内部类区别" class="headerlink" title="补充： 静态内部类和非静态内部类区别"></a>补充： 静态内部类和非静态内部类区别</h3><p><strong>总结</strong></p>
+<ol>
+<li><p>是否能拥有静态成员<br>静态内部类可以有静态成员(方法，属性)，而非静态内部类则不能有静态成员(方法，属性)</p>
+</li>
+<li><p>访问外部类的成员<br>静态内部类只能够访问外部类的静态成员,而非静态内部类则可以访问外部类的所有成员(方法，属性)。</p>
+</li>
+<li><p>静态内部类和非静态内部类在创建时有区别<br>//假设类A有静态内部类B和非静态内部类C，创建B和C的区别为：</p>
+<pre><code>A a=new A(); 
+A.B b=new A.B(); 
+A.C c=a.new C();</code></pre></li>
+</ol>
+<p><strong>在建造者模式中使用静态内部类的原因:</strong></p>
+<p>静态内部类相当于是一个独立的类，但是如果某个类A只想被类B使用，则可以把A作为静态内部类放到B中，这样就能B.A.method()这样去使用了，相当于在A的前面加了一个限定符，避免A放在外面时，被其他类所依赖。同时，在外部类没有初始化时，同样可以初始化静态内部类，如上面的做法。</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -582,7 +633,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://abulading.cn/2020/05/09/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/">http://abulading.cn/2020/05/09/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/</a>
+                    <a href="http://abulading.cn/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">http://abulading.cn/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -785,75 +836,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/17/kai-men-di-yi-hua/">
+                <a href="/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="开门第一话">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="设计模式之建造者模式">
                         
-                        <span class="card-title">开门第一话</span>
+                        <span class="card-title">设计模式之建造者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            有自己的空间是件有意思的事情。
-做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-17
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            风雪夜归人
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E9%97%B2%E8%B0%88/">
-                        <span class="chip bg-color">闲谈</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/09/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="SpringMVC 中的中文乱码问题">
-                        
-                        <span class="card-title">SpringMVC 中的中文乱码问题</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            SpringMVC 中的中文乱码问题在前段时间玩的一个SSM项目中，遇到了不少中文乱码的问题，经常读出的数据变成了“？？？”，我也是一脸 ？？？，现在做个小记录。
-其实除了在SpringMVC中有中文乱码的问题，在MyBatis中同样存在，
+                            设计模式之建造者模式在java中实例化某个类的对象时，我们会经常碰到 **bulider 这样的形式，这其实是使用的就是建造者模式。但是为什么不直接用普通的方法去实例化，而要这么绕一下呢？这种情况我觉得在设计模式中经常遇到，比如工厂模式也是
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-01
                             </span>
                         <span class="publish-author">
                             
@@ -864,6 +869,44 @@
                     </div>
                 </div>
 
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/05/26/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="设计模式之观察者模式">
+                        
+                        <span class="card-title">设计模式之观察者模式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            设计模式之观察者模式因为前段时间在公司项目中一个场景下需要用到观察者模式，所以在此做一个记录。
+我遇到的问题是，在一个参数设置页面设置参数后，需要其它依赖这个参数的对象同时更新这些参数，如果采用后者不断去轮询的方式，一来消耗性能，二来也不能
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            风雪夜归人
+                            
+                        </span>
+                    </div>
+                </div>
                 
             </div>
         </div>
