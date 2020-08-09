@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="开门第一话, a~bulading">
+    <meta name="keywords" content="SpringMVC 中的中文乱码问题, a~bulading">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>开门第一话 | a~bulading</title>
+    <title>SpringMVC 中的中文乱码问题 | a~bulading</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">开门第一话</h1>
+                    <h1 class="description center-align post-title">SpringMVC 中的中文乱码问题</h1>
                 </div>
             </div>
         </div>
@@ -429,13 +429,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E9%97%B2%E8%B0%88/">
-                                <span class="chip bg-color">闲谈</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -447,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-17
+                    2020-05-09
                 </div>
                 
 
@@ -463,11 +459,87 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>有自己的空间是件有意思的事情。</p>
-<p>做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？得先知道自己能做出什么事情，才能知道有什么事情交给别人做，毫无疑问，知道自己究竟能做什么是件很难的事情，但我大致想好了。</p>
-<p>其一是日常所学。闻道有先后，我并不介意自己分享十分基础的知识，我其实能想象得到，每过一段时间回头再看，都会发现自己以前的愚蠢与浅薄。但假如真的能做到这样，说明我还是有所进步的，否认以前的自己并不完全是件坏事。</p>
-<p>身上的烟火气息提醒我，平日里的柴米油盐，嬉笑怒骂同样珍贵，或许哪天上的是一则游记，或许是一个菜谱，或许是一个笑话，或奇闻，或五行八卦阴阳异术……还是回到之前的问题：我到底会什么？</p>
-<pre><code>“you know nothing”---- Ygritte</code></pre><script>
+                <h1 id="SpringMVC-中的中文乱码问题"><a href="#SpringMVC-中的中文乱码问题" class="headerlink" title="SpringMVC 中的中文乱码问题"></a>SpringMVC 中的中文乱码问题</h1><p>在前段时间玩的一个SSM项目中，遇到了不少中文乱码的问题，经常读出的数据变成了“？？？”，我也是一脸 ？？？，现在做个小记录。</p>
+<p>其实除了在SpringMVC中有中文乱码的问题，在MyBatis中同样存在，一般是编码方式不统一导致的，大部分可以通过配置文件去解决，至于不能解决的那部分，只是我还没碰到罢了。</p>
+<h3 id="分门别类："><a href="#分门别类：" class="headerlink" title="分门别类："></a>分门别类：</h3><h4 id="1-要在web-xm中配置拦截器"><a href="#1-要在web-xm中配置拦截器" class="headerlink" title="1. 要在web.xm中配置拦截器"></a>1. 要在web.xm中配置拦截器</h4><p>注意web.xml的配置要遵守一定的顺叙,一个样例如下：</p>
+<pre><code>&lt;!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
+&lt;web-app&gt;
+  &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
+</code></pre><p> 配置路径，以使得监听器能去加载spring的配置文件applicationContext,配置好之后，就能在**tController类中使用依赖注入了</p>
+<pre><code>  &lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+  &lt;/context-param&gt;
+
+
+  &lt;!--解决中文乱码的问题，设置过滤器--&gt;
+  &lt;filter&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+    &lt;!--设定编码集--&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;encoding&lt;/param-name&gt;
+      &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+  &lt;/filter&gt;
+
+  &lt;!--设置该字符过滤器要拦截的内容--&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;!--表示所有的内容都被此过滤器拦截--&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;</code></pre><p> 配置监听器，因为启动服务器后，加载web.xml文件，根据此文件加载springMVC的配置文件，而没有去加载spring的配置文件，<br>  所以需要设置此监听器，当服务器启动开始加载servletContext对象时，也去加载spring的配置文件<br> 但该监听器 默认只加载WEB-INF目录下的applicationContext.xml配置文件，所以下面还需要配置其路径</p>
+<pre><code>&lt;listener&gt;
+  &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+
+
+  &lt;!--这里是配置前端控制器--&gt;
+  &lt;!--希望做的是 1.加载springMVC.xml配置文件
+  &lt;
+                1. 启动服务器，就创建该servlet--&gt;
+ &lt;servlet&gt;
+   &lt;servlet-name&gt;dispatchServlet&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+   &lt;!--加载springMVC配置文件，springMVC.xml配置文件在resources目录下进行创建，
+   创建的方法是：右键resources-&gt;new-&gt;选择xml configuration File-&gt;选择Spring config-&gt;命名为springMVC.xml--&gt;
+   &lt;init-param&gt;
+     &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+     &lt;param-value&gt;classpath:springMVC.xml&lt;/param-value&gt;
+   &lt;/init-param&gt;
+   &lt;!--启动服务器，创建该servlet--&gt;
+   &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+ &lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;dispatchServlet&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><h4 id="2-数据库的编码方式"><a href="#2-数据库的编码方式" class="headerlink" title="2. 数据库的编码方式"></a>2. 数据库的编码方式</h4><p>(一)：数据库端字符集设置</p>
+<p>　　1. 安装mysql时，会有一个数据库编码设置，将其设置为utf-8</p>
+<p>　　2. 先设置数据库的字符集属性；</p>
+<p>　　3. 将要显示中文的字段设置为UTF-8</p>
+<p>springMVC项目，存中文到mysql是乱码（?????）<br>问题：jdbc连接mysql数据库，web页面输入的中文，存到数据库却变成”？？？？”；</p>
+<p>　　但是数据库中的中文却能够正常读出并在页面显示<br>mysql中运行 ：SHOW VARIABLES LIKE ‘char%’</p>
+<p>发现唯一一个不是utf8的是character_set_server这个参数。</p>
+<p>在my.cnf中，mysqld下添加“character-set-server=utf8”</p>
+<p>重启mysql后，问题解决。</p>
+<h4 id="3-检查Spring的配置文件"><a href="#3-检查Spring的配置文件" class="headerlink" title="3. 检查Spring的配置文件"></a>3. 检查Spring的配置文件</h4><p>如果web.xml和数据库的编码格式都设置为了utf8，仍存到数据库之后为乱码<br>则有可能是传输的时候出现了问题，所以继续检查spring的配置文件applicationContext.xml中，配置连接池时，url配置是否加上了编码方式，如下：</p>
+<p>这时spring配置中整合spring与mybatis的其中一段配置，这是配置连接池的，在url后面指定传输时的数据编码格式为utf8</p>
+<pre><code>
+ &lt;!--配置连接池--&gt;
+&lt;bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"&gt;
+    &lt;!--配置四个属性--&gt;
+    &lt;property name="driverClass" value="com.mysql.jdbc.Driver"/&gt;
+    &lt;property name="jdbcUrl" value="jdbc:mysql:///ssm?characterEncoding=utf8"/&gt;
+    &lt;property name="user" value="root"/&gt;
+    &lt;property name="password" value=""/&gt;
+&lt;/bean&gt;
+</code></pre><h4 id="4-补充：Mybatis-中的中文乱码"><a href="#4-补充：Mybatis-中的中文乱码" class="headerlink" title="4. 补充：Mybatis 中的中文乱码"></a>4. 补充：Mybatis 中的中文乱码</h4><p>mybatis操作数据的乱码有两种，一是数据库本身插入中文就显示乱码，这个可以通过修改库或者表的编码格式进行修改或者在建表的时候就选择utf8的编码格式。</p>
+<p>第二种是mybatis传入中文数据到数据库，建库时设置了数据库默认字符集为UTF-8，通过mysql workbench直接插入中文显示完全正常。但是使用mybaits插入数据时，中文显示成了”???”这样的乱码。但从数据库获取的中文不会乱码。跟踪数据库操作，SQL语句中的中文还是显示正常的，但是插入到mysql数据库后就乱码了，于是判断可能是数据库连接的问题。后来在网上找了下资料，发现确实可以为mysql数据库的连接字符串设置编码方式，如下：</p>
+<pre><code>jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;amp;characterEncoding=utf8</code></pre><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -510,7 +582,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://abulading.cn/2020/05/17/kai-men-di-yi-hua/">http://abulading.cn/2020/05/17/kai-men-di-yi-hua/</a>
+                    <a href="http://abulading.cn/2020/05/09/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/">http://abulading.cn/2020/05/09/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -547,11 +619,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E9%97%B2%E8%B0%88/">
-                                    <span class="chip bg-color">闲谈</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -721,29 +789,25 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/07/16/qian-tan-activity/">
+                <a href="/2020/05/17/kai-men-di-yi-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="浅谈Activity">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="开门第一话">
                         
-                        <span class="card-title">浅谈Activity</span>
+                        <span class="card-title">开门第一话</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是Activity
-Activity一直是一个老生长谈的问题，大概是因为用的多，所以谈论的自然也多一些。
-
-
-        document.querySelectorAll('.github-emoji')
-          .f
+                            有自己的空间是件有意思的事情。
+做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-17
                         </span>
                         <span class="publish-author">
                             
@@ -756,8 +820,8 @@ Activity一直是一个老生长谈的问题，大概是因为用的多，所以
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Android/">
-                        <span class="chip bg-color">Android</span>
+                    <a href="/tags/%E9%97%B2%E8%B0%88/">
+                        <span class="chip bg-color">闲谈</span>
                     </a>
                     
                 </div>
@@ -768,7 +832,7 @@ Activity一直是一个老生长谈的问题，大概是因为用的多，所以
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
                 <a href="/2020/05/09/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/">
@@ -799,6 +863,7 @@ Activity一直是一个老生长谈的问题，大概是因为用的多，所以
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
