@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="浅谈Activity, a~bulading">
+    <meta name="keywords" content="侯捷老师STL-听课笔记, a~bulading">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>浅谈Activity | a~bulading</title>
+    <title>侯捷老师STL-听课笔记 | a~bulading</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">浅谈Activity</h1>
+                    <h1 class="description center-align post-title">侯捷老师STL-听课笔记</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Android/">
-                                <span class="chip bg-color">Android</span>
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C++</span>
                             </a>
                         
                     </div>
@@ -447,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-19
+                    2020-07-01
                 </div>
                 
 
@@ -463,9 +463,40 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="什么是Activity"><a href="#什么是Activity" class="headerlink" title="什么是Activity"></a>什么是Activity</h2><ol>
-<li>Activity一直是一个老生长谈的问题，大概是因为用的多，所以谈论的自然也多一些。</li>
-</ol>
+                <h1 id="侯捷老师STL-听课笔记"><a href="#侯捷老师STL-听课笔记" class="headerlink" title="侯捷老师STL-听课笔记"></a>侯捷老师STL-听课笔记</h1><p>1.binary_search使用时必须为有序容器</p>
+<p>2.find算法使用时，如果没有查到目标元素，返回值的迭代器是b.end()，因为它是从头逐个开始查找的，所以如果没有目标值，就会一直走到容器尾部。</p>
+<p>3.如果使用的算法涉及自定义类型对象的比较或者查找，需要在自定义类中重载＝＝号。如果参数是需要传入的是仿函数，则定义一个仿函数重载()，注意区分这两种情况，主要是要看算法的参数类型。</p>
+<p>4.random_shuffle默认每次打乱后的结果是一样的，如果要实现每次打乱的结果不一样，则需要设置随机种子，导入<ctime>，srand（（unsigned int）time（NULL））。</ctime></p>
+<p>5.Set_union,set_intersection,set_difference(差集)所传入的容器需要是有序的，并且返回值需要一个迭代器接受，这个迭代器指向输出结果的尾部。对于输出结果的存放，先要定义一个空间足够的容器，容器的起始地址作为参数。</p>
+<p>6.构造函数与析构函数都是不继承的，子类中会重新生成默认的构造函数，在继承时，子类的构造函数的调用顺叙为，如果继承多个类，1 按照继承顺叙从左到右的顺叙依次调用父类的构造函数；2 类成员变量中有继承自父类的，按顺叙调用父类的构造函数（继承自父类的成员变量要调用父类的构造函数进行初始化）；3 调用本类自己的构造函数</p>
+<p>7.为什么list容器不能像vector，deque那样使用algorithm的sort算法？？（9）</p>
+<p>源码： 是因为list底层是用链表实现的，他的指针（迭代器）不能支持随机访问，而algorithm库里的sort函数需要下图红字的操作</p>
+<p><img src="https://pic.rmb.bdstatic.com/bjh/a8297ea85a77919d3923e1a8f874c396.png" alt="图片1.png"></p>
+<p>8.Deque在需要扩容时是如何实现的？与vector有何不同（两倍扩容）？</p>
+<p>Deque是在内存上是分段连续的，扩容的时候是首位位置增加一个新的连续片段</p>
+<p>9.分配器的实现，需要的参数（p是指针，1是分配的空间个数）</p>
+<p><img src="https://ae01.alicdn.com/kf/Hb808568ca9f74351bc83dd8e6f41cddfU.png" alt="image.png"></p>
+<p>10.Oop面向对象是为了实现数据和方法的组合，而泛型编程则是把数据和方法实现分离。</p>
+<p>11.泛化，特化，偏特化。<br>泛化可以适用于不同的类型，但是可能对于某些特定的类型，函数要用不同的实现方式，这个时候可以对特定类型，模板可以做特化（明确原来模板的所有类型），偏特化则是明确部分类型。注意三者之间语法的不同。<br><img src="https://ae05.alicdn.com/kf/Hc5e9e117072f4ccf8ada78b2ba04f2b1c.png" alt="image1.png"><br>源码中的特化例子</p>
+<p><img src="https://ae03.alicdn.com/kf/H84a67b478db449cfa18a201a1edaf7c7W.png" alt="image.png"></p>
+<p>偏特化例子</p>
+<p><img src="https://ae04.alicdn.com/kf/H0e9d5db71c894eb7abde90ffd8368de7B.png" alt="image.png"></p>
+<p>12.分配器 allocators</p>
+<p>分配器其实在容器声明的时候可以指明，但一般没有必要，不声明的时候编译器会调用默认的。通过allocator对象调用Allocate 和 deallocate函数，而这两个函数是通过new函数和delete函数实现的，而new，delete函数都是通过调用malloc，free函数实现的。但是malloc函数在分配内存时，除了所用于存储数据的部分外，还有overhead部分，用来存储该内存块的信息，这部分也是会占不少空间的。所以当malloc较小内存的时候，该部分就会占较大的比例。<br><img src="https://pic.rmb.bdstatic.com/bjh/8ac022481ef4030ac59fc4214a6c31cb.png" alt="image.png"><br><img src="https://pic.rmb.bdstatic.com/bjh/0497efe8587c4a3107a44da814cec6a1.png" alt="image.png"></p>
+<p><img src="https://ae03.alicdn.com/kf/Hb075b4074f9d45d08a6339cb9e889d120.png" alt="image.png"></p>
+<p>13.容器的结构与分类</p>
+<p><img src="https://ae02.alicdn.com/kf/Hadb8549876d8474a8ab9c463744170c6h.png" alt="image.png"><br><img src="https://ae01.alicdn.com/kf/Hae6104aabdf9403b8c35a170acb23dadL.png" alt="image.png"></p>
+<p>14.深入理解list</p>
+<p>List是用双向循环链表实现的，为了表示出容器的左开右闭的特性，end（）迭代器指向的尾部是一个空节点。每种容器都有自己的iterator实现，它们的iterator都会自己typedef五个类型，并且重载<em>，-&gt;，++（前），（后）++等操作符。比如list的</em>号重载是要返回当前节点的data，而前++与后++的重载也要注意，由于是链表，所以++操作的时候是返回下一个节点的指针，而不是像连续区间那样直接往后移动一个单位。<br>另外，对于++操作，前++是可以连续操作的，比如++（++i），所以返回值需要是原来对象的引用，而i++++是不被允许的，所以返回值就不能是该对象的引用。另外，重载++符号的时候，由于无法区分前++和后++，所以重载前++的时候，在添加一个“int”作为占位参数来区分。见下图的红色圈出部分。每个节点的前后指针都要占4或者8个字节，这在使用容器的时候要有意识。</p>
+<p><img src="https://pic.rmb.bdstatic.com/bjh/df36cb11be4134c94d43b04575861756.png" alt="image.png"><br><img src="https://ae04.alicdn.com/kf/H3b639cc3f7e34fdca7278963e0662a09q.png" alt="image.png"><br><img src="https://ae02.alicdn.com/kf/H6e74cfbd68d946b4855fef06a9c42ded1.png" alt="image.png"></p>
+<p>15.Iterator作为容器与算法之间连接的桥梁，定义在每一种容器的内部，指针可以看作是一种退化的迭代器。因为数据与算法分离，算法需要知道容器的数据类型，迭代器类型，以及步长限制（迭代器能+1还是可以+任意值），这些都要通过迭代器获取。但是传给算法的迭代器有可能是退化的iterator，也就是指针，而指针是不能提供上述信息的，所以需要一个trait（特征的意思），萃取器，把是指针的迭代器过滤掉。<br><img src="https://ae03.alicdn.com/kf/Hc9a219c11201412aa3700ff289e093dfc.png" alt="image.png"><br><img src="https://pic.rmb.bdstatic.com/bjh/6b02e5a7fcab870edad749f7faeb3976.png" alt="image.png"></p>
+<p>10 vector详解</p>
+<p>Vector可以看作是一个可扩充的数组，每次扩容是按两倍扩容，如果原来的空间是0的话，第一次扩容则是变为1，没有扩容是在原来空间上进行的，都需要另行开辟空间。vector中维护三个指针，start，finish，end_of_storage.如图，所以对一个vertor求sizeof的时候，大小应该是12.（注意不是说size（））。三个指针也用来计算实现capacity，size函数，注意对于连续存储的容器（包括deque），都是可以用中括号[ ]来随机访问的，比如下图中就有[ ]的重载。<br><img src="https://pic.rmb.bdstatic.com/bjh/7b1d92da84d70585281e7f75ebb63d13.png" alt="image.png"><br>16.Array 详解<br>Array是一个定长的数组，所以在定义一个array的时候需要指定数组长度，如果指定是0的话，源码中也会对此做判断，然后初始化的时候给出1个单位空间，见下图红色横线部分。Array的iterator是一个普通的指针，所以萃取器使用的也是上面那一部分。另外，array是没有构造函数和析构函数的，可以注意到它是一个struct。</p>
+<p><img src="https://ae01.alicdn.com/kf/H26c16d554b064d4b98124404edf568dbs.png" alt="image.png"></p>
+<p>17.Deque详解<br>Deque是分段连续的，分段是本质，连续是表象。它有一个控制中心，就是图中的map所示的部分，是用一个vector实现的，应为要实现动态的增加buffer段，需要用到vertor的扩容的特性。Vector中存储的是指针，指向各个不同的分段。而iterator中则存储了四个指针，分别指向数据段的当前数据，开始位置，结束位置和node，它指向所在段在vector中所对应的位置。当在查找段中的数据时，他会检测是否到了所在段的边缘，若已超过所在段的范围，则开始移动到vector中的下一个指针，到达下一个buffer，通过这样的方法实现模拟出了连续空间。扩容的时候，先开辟一个buffer的空间，然后在vector中新增一个指针，指向这个新增的buffer，从而实现双端扩容。从这里可以看出iterator是一中功能更加强大的指针。<br>所以可以说deque的连续性主要是通过它的iterator实现的。<br>当它扩容的时候，vector是两倍扩容的，为了方便deque的双端操作，所以在vertor进行原来的内容拷贝的时候，会把内容拷贝到新vector的中间位置，以便deque的双端扩容。<br>Deque的insert函数的实现，非常智能。如果是插入在首位位置，则直接调用push_back()或者push_front()函数，如果插入在中间，则先计算插入位置离头近还是离尾近，然后选择一个更近的方向，把元素往前移动，然后再插入相应位置。<br><img src="https://ae01.alicdn.com/kf/Hed2a99abc7da4929b3bf6d0d6b438b9da.png" alt="image.png"><br><img src="https://ae02.alicdn.com/kf/H2bb7b1b5854e4fa68845765ec1d483f3q.png" alt="image.png"><br><img src="https://ae03.alicdn.com/kf/H98b237def20748da85597825e6d66daf1.png" alt="image.png"></p>
+<p>18.Stack，queue详解</p>
+<p>Stack和queue默认底层都是通过deque实现的，因为deque完全可以满足它们所需要的功能。这两种容器都不能遍历，也没有迭代器。Stack的pop函数就通过调用deque的pop_back()函数。queue的相应函数也是通过调用deque的函数实现的。<br>所以相应的，其实stack和queue也可以用list作为它的底层。<br>Stack可以用vector作为他的底层，但是queue不可以，原因时vector无法提供pop_front函数。同理，这两种容器也不能使用map或者set作为他的底层。</p>
+<p><img src="https://ae01.alicdn.com/kf/H669e55b578004ce49c626dbd08087c07D.png" alt="image.png"><br><img src="https://ae01.alicdn.com/kf/H3d6ddba015f14d0aa81aa4d67f612c76u.png" alt="image.png"><br><img src="https://ae03.alicdn.com/kf/H332e4e195f884a3886c1dd45f4a7b7dcu.png" alt="image.png"><br><img src="https://ae04.alicdn.com/kf/H67ad2cf002344229bd4591f89efd58b6n.png" alt="image.png"></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -509,7 +540,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://abulading.cn/2020/05/19/qian-tan-activity/">http://abulading.cn/2020/05/19/qian-tan-activity/</a>
+                    <a href="http://abulading.cn/2020/07/01/hou-jie-lao-shi-stl-ting-ke-bi-ji/">http://abulading.cn/2020/07/01/hou-jie-lao-shi-stl-ting-ke-bi-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -547,8 +578,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Android/">
-                                    <span class="chip bg-color">Android</span>
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C++</span>
                                 </a>
                             
                         </div>
@@ -720,25 +751,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/21/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/">
+                <a href="/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="SpringMVC 中的中文乱码问题">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="设计模式之建造者模式">
                         
-                        <span class="card-title">SpringMVC 中的中文乱码问题</span>
+                        <span class="card-title">设计模式之建造者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            SpringMVC 中的中文乱码问题在前段时间玩的一个SSM项目中，遇到了不少中文乱码的问题，经常读出的数据变成了“？？？”，我也是一脸 ？？？，现在做个小记录。
-其实除了在SpringMVC中有中文乱码的问题，在MyBatis中同样存在，
+                            设计模式之建造者模式在java中实例化某个类的对象时，我们会经常碰到 **bulider 这样的形式，这其实是使用的就是建造者模式。但是为什么不直接用普通的方法去实例化，而要这么绕一下呢？这种情况我觉得在设计模式中经常遇到，比如工厂模式也是
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-01
                         </span>
                         <span class="publish-author">
                             
@@ -751,8 +781,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SSM/">
-                        <span class="chip bg-color">SSM</span>
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>
@@ -766,25 +796,25 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/17/kai-men-di-yi-hua/">
+                <a href="/2020/05/26/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="开门第一话">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="设计模式之观察者模式">
                         
-                        <span class="card-title">开门第一话</span>
+                        <span class="card-title">设计模式之观察者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            有自己的空间是件有意思的事情。
-做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？
+                            设计模式之观察者模式因为前段时间在公司项目中一个场景下需要用到观察者模式，所以在此做一个记录。
+我遇到的问题是，在一个参数设置页面设置参数后，需要其它依赖这个参数的对象同时更新这些参数，如果采用后者不断去轮询的方式，一来消耗性能，二来也不能
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-26
                             </span>
                         <span class="publish-author">
                             
@@ -797,8 +827,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%97%B2%E8%B0%88/">
-                        <span class="chip bg-color">闲谈</span>
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>
