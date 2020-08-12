@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="浅谈Activity, a~bulading">
+    <meta name="keywords" content="带图片的toast的实现, a~bulading">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>浅谈Activity | a~bulading</title>
+    <title>带图片的toast的实现 | a~bulading</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">浅谈Activity</h1>
+                    <h1 class="description center-align post-title">带图片的toast的实现</h1>
                 </div>
             </div>
         </div>
@@ -429,13 +429,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Android/">
-                                <span class="chip bg-color">Android</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -447,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-19
+                    2020-06-12
                 </div>
                 
 
@@ -463,9 +459,95 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="什么是Activity"><a href="#什么是Activity" class="headerlink" title="什么是Activity"></a>什么是Activity</h2><ol>
-<li>Activity一直是一个老生长谈的问题，大概是因为用的多，所以谈论的自然也多一些。</li>
-</ol>
+                <h1 id="带图片toast的实现"><a href="#带图片toast的实现" class="headerlink" title="带图片toast的实现"></a>带图片toast的实现</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近刚开始接触Android开发，算是进入了到了一个新领域。对于一个门外汉来讲，再简单的知识对他而言也是全新的。闻道有先后，术业有专攻，如是而已。这次介绍一下用到的带图片的toast的实现。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>可以自己创建一个ToastUtil类，提供showToast方法，在需要的时候调用即可。</p>
+<pre><code>import android.content.Context;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bilibili.bletester.R;
+
+public class ToastUtil extends Toast {
+
+    private static Toast mToast;
+    public ToastUtil(Context context) {
+        super(context);
+    }
+
+    public static void showToast(Context context, String content){
+    //获取系统的LayoutInflater
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.toast_layout,null);
+        TextView tv_content = view.findViewById(R.id.tv_content);
+        tv_content.setText(content);
+
+        //实例化toast
+        mToast = new Toast(context);
+        mToast.setView(view);
+        mToast.setDuration(Toast.LENGTH_SHORT);
+    //这里可以设置toast默认显示的位置，当不进行设置时，则默认显示在屏幕下方
+       // mToast.setGravity(Gravity.BOTTOM,);
+        //mToast.setGravity(Gravity.BOTTOM,0,100);
+        mToast.show();
+
+
+    }
+}</code></pre><p>同时，在drawable中添加要显示的图片，注意添加图片不要太大，自己调试到合适尺寸，<br>如本例中添加了wetchat.jpg图片</p>
+<p><img src="https://pic.rmb.bdstatic.com/bjh/22c1a0811abcaad1fccb7f60a147f520.png" alt="image.png"></p>
+<p>在layout包下添加toast_layout.xml文件，内容如下</p>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"&gt;
+
+    &lt;ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/wechat" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:gravity="center"
+        android:paddingLeft="18dp"
+        android:paddingTop="11dp"
+        android:paddingRight="18dp"
+        android:paddingBottom="11dp"
+        android:text="提醒成功"
+        android:textColor="?attr/colorAccent"
+        android:textSize="16sp" /&gt;
+
+&lt;/LinearLayout&gt;</code></pre><p>添加图片的关键在于中间的ImageView字段，配置图片与文字呈上下显示的字段是<br>android:orientation=”vertical”&gt;，<br>接下来进行测试，我在mainActivity.java中定义了如下函数：</p>
+<pre><code>//测试ToastUtil类
+
+public void toast_test(View view){
+    ToastUtil.showToast(this,"lalala");
+}</code></pre><p>然后在activity_main.xml中添加如下一个按钮，即可实现调用了</p>
+<pre><code>&lt;Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button"
+    android:onClick="toast_test"
+    app:layout_constraintBottom_toTopOf="@+id/textView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" /&gt;
+</code></pre><p>测试结果如下：</p>
+<p><img src="https://pic.rmb.bdstatic.com/bjh/9efe6df56e8b5913b17846ac83477758.png" alt="image.png"></p>
+<p>其中server和client两个button是做其他用的，和这里的功能无关</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -509,7 +591,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://abulading.cn/2020/05/19/qian-tan-activity/">http://abulading.cn/2020/05/19/qian-tan-activity/</a>
+                    <a href="http://abulading.cn/2020/06/12/dai-tu-pian-de-toast-de-shi-xian/">http://abulading.cn/2020/06/12/dai-tu-pian-de-toast-de-shi-xian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -546,11 +628,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Android/">
-                                    <span class="chip bg-color">Android</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -720,25 +798,26 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/21/springmvc-zhong-de-zhong-wen-luan-ma-wen-ti/">
+                <a href="/2020/07/01/hou-jie-lao-shi-stl-ting-ke-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="SpringMVC 中的中文乱码问题">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="侯捷老师STL-听课笔记">
                         
-                        <span class="card-title">SpringMVC 中的中文乱码问题</span>
+                        <span class="card-title">侯捷老师STL-听课笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            SpringMVC 中的中文乱码问题在前段时间玩的一个SSM项目中，遇到了不少中文乱码的问题，经常读出的数据变成了“？？？”，我也是一脸 ？？？，现在做个小记录。
-其实除了在SpringMVC中有中文乱码的问题，在MyBatis中同样存在，
+                            侯捷老师STL-听课笔记1.binary_search使用时必须为有序容器
+2.find算法使用时，如果没有查到目标元素，返回值的迭代器是b.end()，因为它是从头逐个开始查找的，所以如果没有目标值，就会一直走到容器尾部。
+3.如果使用的
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-01
                         </span>
                         <span class="publish-author">
                             
@@ -751,8 +830,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SSM/">
-                        <span class="chip bg-color">SSM</span>
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
                     </a>
                     
                 </div>
@@ -766,25 +845,25 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/17/kai-men-di-yi-hua/">
+                <a href="/2020/06/05/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="开门第一话">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="设计模式之观察者模式">
                         
-                        <span class="card-title">开门第一话</span>
+                        <span class="card-title">设计模式之观察者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            有自己的空间是件有意思的事情。
-做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？
+                            设计模式之观察者模式因为前段时间在公司项目中一个场景下需要用到观察者模式，所以在此做一个记录。
+我遇到的问题是，在一个参数设置页面设置参数后，需要其它依赖这个参数的对象同时更新这些参数，如果采用后者不断去轮询的方式，一来消耗性能，二来也不能
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-05
                             </span>
                         <span class="publish-author">
                             
@@ -797,8 +876,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%97%B2%E8%B0%88/">
-                        <span class="chip bg-color">闲谈</span>
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>

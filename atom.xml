@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://abulading.cn/"/>
-  <updated>2020-08-09T01:55:05.349Z</updated>
+  <updated>2020-08-12T02:21:49.823Z</updated>
   <id>http://abulading.cn/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>设计模式之建造者模式</title>
-    <link href="http://abulading.cn/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/"/>
-    <id>http://abulading.cn/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/</id>
-    <published>2020-07-01T10:28:53.000Z</published>
-    <updated>2020-08-09T01:55:05.349Z</updated>
+    <link href="http://abulading.cn/2020/08/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/"/>
+    <id>http://abulading.cn/2020/08/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/</id>
+    <published>2020-08-01T10:28:53.000Z</published>
+    <updated>2020-08-12T02:21:49.823Z</updated>
     
     <summary type="html">
     
@@ -67,11 +67,34 @@
   </entry>
   
   <entry>
+    <title>带图片的toast的实现</title>
+    <link href="http://abulading.cn/2020/06/12/dai-tu-pian-de-toast-de-shi-xian/"/>
+    <id>http://abulading.cn/2020/06/12/dai-tu-pian-de-toast-de-shi-xian/</id>
+    <published>2020-06-12T02:29:30.000Z</published>
+    <updated>2020-08-12T02:36:42.206Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;带图片toast的实现&quot;&gt;&lt;a href=&quot;#带图片toast的实现&quot; class=&quot;headerlink&quot; title=&quot;带图片toast的实现&quot;&gt;&lt;/a&gt;带图片toast的实现&lt;/h1&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>设计模式之观察者模式</title>
-    <link href="http://abulading.cn/2020/05/26/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/"/>
-    <id>http://abulading.cn/2020/05/26/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/</id>
-    <published>2020-05-26T14:08:31.000Z</published>
-    <updated>2020-08-09T01:54:51.782Z</updated>
+    <link href="http://abulading.cn/2020/06/05/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/"/>
+    <id>http://abulading.cn/2020/06/05/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/</id>
+    <published>2020-06-05T14:08:31.000Z</published>
+    <updated>2020-08-12T02:23:11.258Z</updated>
     
     <summary type="html">
     
@@ -113,31 +136,6 @@
     
     
       <category term="SSM" scheme="http://abulading.cn/tags/SSM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈Activity</title>
-    <link href="http://abulading.cn/2020/05/19/qian-tan-activity/"/>
-    <id>http://abulading.cn/2020/05/19/qian-tan-activity/</id>
-    <published>2020-05-19T04:02:47.000Z</published>
-    <updated>2020-08-09T01:34:02.140Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;什么是Activity&quot;&gt;&lt;a href=&quot;#什么是Activity&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="Android" scheme="http://abulading.cn/tags/Android/"/>
     
   </entry>
   
