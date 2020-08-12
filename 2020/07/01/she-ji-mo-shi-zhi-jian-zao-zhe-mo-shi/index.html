@@ -447,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-01
+                    2020-07-01
                 </div>
                 
 
@@ -572,7 +572,79 @@
                 .setKeyboard("罗技")
                 .setUsbCount(2)
                 .build();</code></pre><h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>构建者模式是一个非常实用而常见的创建类型的模式（creational design pattern)，例如图片处理框架Glide，网络请求框架Retrofit等都使用了此模式。</p>
-<p><strong>扩展</strong></p>
+<p>在我使用的过程中，是设置蓝牙过滤器时使用到ScanFilter这个类：</p>
+<pre><code>ScanFilter filter = new ScanFilter.Builder()
+.setDeviceAddress(address)
+.build();</code></pre><p>在ScanFilter中，具体的定义方式与上面给出的不太一样，这里节选其中的部分代码：</p>
+<pre><code>public final class ScanFilter implements Parcelable {
+
+    @Nullable
+    private final String mDeviceName;
+
+    @Nullable
+    private final String mDeviceAddress;
+
+    @Nullable
+    private final ParcelUuid mServiceUuid;
+    @Nullable
+    private final ParcelUuid mServiceUuidMask;
+
+    ....
+    ....
+    @Nullable
+    private final byte[] mManufacturerDataMask;
+
+    /** @hide */
+    public static final ScanFilter EMPTY = new ScanFilter.Builder().build();
+
+
+    private ScanFilter(String name, String deviceAddress, ParcelUuid uuid,
+            ParcelUuid uuidMask, ParcelUuid solicitationUuid,
+            ParcelUuid solicitationUuidMask, ParcelUuid serviceDataUuid,
+            byte[] serviceData, byte[] serviceDataMask,
+            int manufacturerId, byte[] manufacturerData, byte[] manufacturerDataMask) {
+        mDeviceName = name;
+        mServiceUuid = uuid;
+        mServiceUuidMask = uuidMask;
+        ....
+        ....
+        mManufacturerData = manufacturerData;
+        mManufacturerDataMask = manufacturerDataMask;
+    }
+public static final class Builder {
+
+        private String mDeviceName;
+        private String mDeviceAddress;
+
+        private ParcelUuid mServiceUuid;
+        private ParcelUuid mUuidMask;
+        ....
+        ....
+        ....
+        private byte[] mManufacturerDataMask;
+
+
+        public Builder setDeviceName(String deviceName) {
+            mDeviceName = deviceName;
+            return this;
+        }
+
+
+        public Builder setDeviceAddress(String deviceAddress) {
+            if (deviceAddress != null &amp;&amp; !BluetoothAdapter.checkBluetoothAddress(deviceAddress)) {
+                throw new IllegalArgumentException("invalid device address " + deviceAddress);
+            }
+            mDeviceAddress = deviceAddress;
+            return this;
+        }
+     public ScanFilter build() {
+            return new ScanFilter(mDeviceName, mDeviceAddress,
+                    mServiceUuid, mUuidMask, mServiceSolicitationUuid,
+                    ....
+                    ....
+                    mManufacturerId, mManufacturerData, mManufacturerDataMask);
+        }
+    }</code></pre><p>在ScanFilter的构造函数中，不是传入的Builder对象，而是直接将设置后的参数传入ScanFilter中，不过这与前面的例子本质是一致的，都是通过build()方法去调用外部类的构造方法。<br><strong>扩展</strong></p>
 <p>其实上面的内容是Builder在Java中一种简化的使用方式，经典的Builder 模式与其有一定的不同，如果没有兴趣的同学就可以不用往下读了。</p>
 <h3 id="建造者模式-VS-简单工厂模式"><a href="#建造者模式-VS-简单工厂模式" class="headerlink" title="建造者模式 VS 简单工厂模式"></a>建造者模式 VS 简单工厂模式</h3><p><strong>相似点</strong></p>
 <p>它们都属于创建型模式「都是创建产品的」</p>
@@ -637,7 +709,7 @@ A.C c=a.new C();</code></pre></li>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://abulading.cn/2020/08/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">http://abulading.cn/2020/08/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/</a>
+                    <a href="http://abulading.cn/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">http://abulading.cn/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -849,7 +921,7 @@ A.C c=a.new C();</code></pre></li>
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/08/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">
+                <a href="/2020/07/01/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
@@ -866,7 +938,7 @@ A.C c=a.new C();</code></pre></li>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-01
                             </span>
                         <span class="publish-author">
                             
