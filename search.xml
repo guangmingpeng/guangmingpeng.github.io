@@ -42,6 +42,25 @@
     
     
     <entry>
+      <title>LinkedHashMap 简介</title>
+      <link href="/2020/06/22/linkedhashmap-jian-jie/"/>
+      <url>/2020/06/22/linkedhashmap-jian-jie/</url>
+      
+        <content type="html"><![CDATA[<h1 id="LinkedHashMap-简介"><a href="#LinkedHashMap-简介" class="headerlink" title="LinkedHashMap 简介"></a>LinkedHashMap 简介</h1><p>平时使用过程中，一直以HashMap居多，或者需要排序的话，会选择TreeMap. 但有时候，既需要hashmap映射的特性，同时又想保持数据放入的先后顺序（其实可以理解为希望hashmap能记忆它put时候的先后次序，带上了时间信息）。这时候，LinkedHashMap就是较好的选择了。</p><p>LinekedHashMap之所以能做到这样，在于它多了两个指向前后元素的指针，这样便在元素之间维持了一个双向链表，使得元素的顺序可知了。结构大致如下：</p><p><img src="https://pic.rmb.bdstatic.com/bjh/003634e34122761c6d674d414a2a51d0.png" alt="image.png"></p><p>从图中可以看出，多出了元素之间的前后指针，以及head，tail两个节点的定义（节点并没有增加，只是给他们取了个名字而已）。</p><p>看源码：</p><pre><code>public class LinkedHashMap&lt;K,V&gt; extends HashMap&lt;K,V&gt; implements Map&lt;K,V&gt;{  static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {    Entry&lt;K,V&gt; before, after;    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {        super(hash, key, value, next);    }    // 双向链表头节点    transient LinkedHashMap.Entry&lt;K,V&gt; head;    // 双向链表尾节点    transient LinkedHashMap.Entry&lt;K,V&gt; tail;    final boolean accessOrder;  }}</code></pre><p>其中accessOrder这个变量指定遍历LinkedHashMap的顺序,true表示按照访问顺序,false表示按照插入顺序，默认为false。</p><p>从它的构造函数可以看出来这一点：</p><pre><code>   public LinkedHashMap(int initialCapacity, float loadFactor) {        super(initialCapacity, loadFactor);        accessOrder = false;    }</code></pre><p>也就是说，可以通过这个变量去设置自己需要的遍历顺序，下面用LinkeHashMap实现LRU即是利用了这一点。那刚刚说的“按访问顺序”是什么意思呢？看下面这个例子：</p><pre><code>LinkedHashMap&lt;Integer,Integer&gt; map = new LinkedHashMap&lt;&gt;(8, 0.75f, true);ap.put(1, 1);map.put(2, 2);map.put(3, 3);map.get(2);System.out.println(map);</code></pre><p>output；</p><pre><code>{1=1, 3=3, 2=2}</code></pre><p>也就是说，它把最近访问过的节点放倒了tail的位置，那么可以理解为，head位置的节点就是最久没有被访问的。那么它是怎么知道该把这个最近访问的节点放到tail位置的呢？从源码中寻找答案：</p><pre><code>    void afterNodeAccess(Node&lt;K,V&gt; e) { // move node to last        LinkedHashMap.Entry&lt;K,V&gt; last;        if (accessOrder &amp;&amp; (last = tail) != e) {            ...            ...            ...        }</code></pre><p>“move node to last”这句是源码中的注释，并不是我自己加的，也就是说正是这个函数实现了最近访问节点到tail的功能。此外，还有一个afterNodeInsertion方法，，其中，evict如果为false，则表处于创建模式,当我们new HashMap(Map map)的时候就处于创建模式，在下面的if语句中， removeEldestEntry 总是返回false,所以if的代码不会执行。</p><pre><code>    void afterNodeInsertion(boolean evict) { // possibly remove eldest        LinkedHashMap.Entry&lt;K,V&gt; first;        if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(first)) {            K key = first.key;            removeNode(hash(key), key, null, false, true);        }    }</code></pre><p>但我们正可以利用removeEldestEntry这个方法，实现一个简易版的LRU。代码如下：</p><pre><code>public class LRUCache&lt;K,V&gt; extends LinkedHashMap&lt;K,V&gt; {  private int cacheSize;  public LRUCache(int cacheSize) {      super(16,0.75f,true);      this.cacheSize = cacheSize;  }  /**   * 判断元素个数是否超过缓存容量   */  @Override  protected boolean removeEldestEntry(Map.Entry&lt;K, V&gt; eldest) {      return size() &gt; cacheSize;  }}</code></pre><p>当满足条件时，就删除head节点，而最近访问的节点则在tail位置。</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>带图片的toast的实现</title>
       <link href="/2020/06/12/dai-tu-pian-de-toast-de-shi-xian/"/>
       <url>/2020/06/12/dai-tu-pian-de-toast-de-shi-xian/</url>
@@ -82,6 +101,12 @@
       
       
       
+        <tags>
+            
+            <tag> SSM </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -109,25 +134,6 @@
       <title>初始话</title>
       <link href="/2020/05/17/chu-shi-hua/"/>
       <url>/2020/05/17/chu-shi-hua/</url>
-      
-        <content type="html"><![CDATA[<p>有自己的空间是件有意思的事情。</p><p>做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？得先知道自己能做出什么事情，才能知道有什么事情交给别人做，毫无疑问，知道自己究竟能做什么是件很难的事情，但我大致想好了。</p><p>其一是日常所学。闻道有先后，我并不介意自己分享十分基础的知识，我其实能想象得到，每过一段时间回头再看，都会发现自己以前的愚蠢与浅薄。但假如真的能做到这样，说明我还是有所进步的，否认以前的自己并不完全是件坏事。</p><p>身上的烟火气息提醒我，平日里的柴米油盐，嬉笑怒骂同样珍贵，或许哪天上的是一则游记，或许是一个菜谱，或许是一个笑话，或奇闻，或五行八卦阴阳异术……还是回到之前的问题：我到底会什么？</p><pre><code>“you know nothing”---- Ygritte</code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 闲谈 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>初始话</title>
-      <link href="/2020/05/17/chu-shi-hua-1/"/>
-      <url>/2020/05/17/chu-shi-hua-1/</url>
       
         <content type="html"><![CDATA[<p>有自己的空间是件有意思的事情。</p><p>做好这个小房子前，其实并没有想好要往里边放什么，这是很奇怪的。木匠做好一个柜子前，他应该先想好这是个衣柜还是鞋柜。然而现在先把柜子做好了，我需要停下来，考虑拿它来干什么用。这又引出了另外一个问题，我能做什么？得先知道自己能做出什么事情，才能知道有什么事情交给别人做，毫无疑问，知道自己究竟能做什么是件很难的事情，但我大致想好了。</p><p>其一是日常所学。闻道有先后，我并不介意自己分享十分基础的知识，我其实能想象得到，每过一段时间回头再看，都会发现自己以前的愚蠢与浅薄。但假如真的能做到这样，说明我还是有所进步的，否认以前的自己并不完全是件坏事。</p><p>身上的烟火气息提醒我，平日里的柴米油盐，嬉笑怒骂同样珍贵，或许哪天上的是一则游记，或许是一个菜谱，或许是一个笑话，或奇闻，或五行八卦阴阳异术……还是回到之前的问题：我到底会什么？</p><pre><code>“you know nothing”---- Ygritte</code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
