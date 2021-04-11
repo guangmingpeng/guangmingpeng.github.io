@@ -23,6 +23,25 @@
     
     
     <entry>
+      <title>常用学习资料地址整理</title>
+      <link href="/2020/08/02/xue-xi-zi-liao-zheng-li/"/>
+      <url>/2020/08/02/xue-xi-zi-liao-zheng-li/</url>
+      
+        <content type="html"><![CDATA[<ol><li>LeetCode题解汇总题解预览地址：<a href="https://leetcode.wang" target="_blank" rel="noopener">https://leetcode.wang</a></li><li>Android常用颜色、图标 <a href="https://www.materialpalette.com/" target="_blank" rel="noopener">https://www.materialpalette.com/</a></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 学习资料 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>设计模式之观察者模式</title>
       <link href="/2020/07/25/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/"/>
       <url>/2020/07/25/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/</url>
