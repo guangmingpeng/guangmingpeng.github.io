@@ -499,74 +499,56 @@ public class ToastUtil extends Toast {
 }</code></pre><p>同时，在drawable中添加要显示的图片，注意添加图片不要太大，自己调试到合适尺寸，<br>如本例中添加了wetchat.jpg图片</p>
 <p><img src="https://pic.rmb.bdstatic.com/bjh/22c1a0811abcaad1fccb7f60a147f520.png" alt="image.png"></p>
 <p>在layout包下添加toast_layout.xml文件，内容如下</p>
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"&gt;
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:orientation=&quot;vertical&quot;&gt;
 
     &lt;ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="10dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/wechat" /&gt;
+        android:id=&quot;@+id/imageView&quot;
+        android:layout_width=&quot;100dp&quot;
+        android:layout_height=&quot;100dp&quot;
+        android:layout_marginBottom=&quot;10dp&quot;
+        android:scaleType=&quot;fitCenter&quot;
+        app:srcCompat=&quot;@drawable/wechat&quot; /&gt;
 
     &lt;TextView
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id=&quot;@+id/tv_content&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
 
 
-        android:gravity="center"
-        android:paddingLeft="18dp"
-        android:paddingTop="11dp"
-        android:paddingRight="18dp"
-        android:paddingBottom="11dp"
-        android:text="提醒成功"
-        android:textColor="?attr/colorAccent"
-        android:textSize="16sp" /&gt;
+        android:gravity=&quot;center&quot;
+        android:paddingLeft=&quot;18dp&quot;
+        android:paddingTop=&quot;11dp&quot;
+        android:paddingRight=&quot;18dp&quot;
+        android:paddingBottom=&quot;11dp&quot;
+        android:text=&quot;提醒成功&quot;
+        android:textColor=&quot;?attr/colorAccent&quot;
+        android:textSize=&quot;16sp&quot; /&gt;
 
 &lt;/LinearLayout&gt;</code></pre><p>添加图片的关键在于中间的ImageView字段，配置图片与文字呈上下显示的字段是<br>android:orientation=”vertical”&gt;，<br>接下来进行测试，我在mainActivity.java中定义了如下函数：</p>
 <pre><code>//测试ToastUtil类
 
 public void toast_test(View view){
-    ToastUtil.showToast(this,"lalala");
+    ToastUtil.showToast(this,&quot;lalala&quot;);
 }</code></pre><p>然后在activity_main.xml中添加如下一个按钮，即可实现调用了</p>
 <pre><code>&lt;Button
-    android:id="@+id/button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Button"
-    android:onClick="toast_test"
-    app:layout_constraintBottom_toTopOf="@+id/textView"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" /&gt;
+    android:id=&quot;@+id/button&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;Button&quot;
+    android:onClick=&quot;toast_test&quot;
+    app:layout_constraintBottom_toTopOf=&quot;@+id/textView&quot;
+    app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+    app:layout_constraintStart_toStartOf=&quot;parent&quot;
+    app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
 </code></pre><p>测试结果如下：</p>
 <p><img src="https://pic.rmb.bdstatic.com/bjh/9efe6df56e8b5913b17846ac83477758.png" alt="image.png"></p>
 <p>其中server和client两个button是做其他用的，和这里的功能无关</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 

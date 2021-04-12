@@ -466,7 +466,7 @@
                 <h1 id="侯捷老师STL-听课笔记"><a href="#侯捷老师STL-听课笔记" class="headerlink" title="侯捷老师STL-听课笔记"></a>侯捷老师STL-听课笔记</h1><p>1.binary_search使用时必须为有序容器</p>
 <p>2.find算法使用时，如果没有查到目标元素，返回值的迭代器是b.end()，因为它是从头逐个开始查找的，所以如果没有目标值，就会一直走到容器尾部。</p>
 <p>3.如果使用的算法涉及自定义类型对象的比较或者查找，需要在自定义类中重载＝＝号。如果参数是需要传入的是仿函数，则定义一个仿函数重载()，注意区分这两种情况，主要是要看算法的参数类型。</p>
-<p>4.random_shuffle默认每次打乱后的结果是一样的，如果要实现每次打乱的结果不一样，则需要设置随机种子，导入<ctime>，srand（（unsigned int）time（NULL））。</ctime></p>
+<p>4.random_shuffle默认每次打乱后的结果是一样的，如果要实现每次打乱的结果不一样，则需要设置随机种子，导入<ctime>，srand（（unsigned int）time（NULL））。</p>
 <p>5.Set_union,set_intersection,set_difference(差集)所传入的容器需要是有序的，并且返回值需要一个迭代器接受，这个迭代器指向输出结果的尾部。对于输出结果的存放，先要定义一个空间足够的容器，容器的起始地址作为参数。</p>
 <p>6.构造函数与析构函数都是不继承的，子类中会重新生成默认的构造函数，在继承时，子类的构造函数的调用顺叙为，如果继承多个类，1 按照继承顺叙从左到右的顺叙依次调用父类的构造函数；2 类成员变量中有继承自父类的，按顺叙调用父类的构造函数（继承自父类的成员变量要调用父类的构造函数进行初始化）；3 调用本类自己的构造函数</p>
 <p>7.为什么list容器不能像vector，deque那样使用algorithm的sort算法？？（9）</p>
@@ -497,25 +497,7 @@
 <p>18.Stack，queue详解</p>
 <p>Stack和queue默认底层都是通过deque实现的，因为deque完全可以满足它们所需要的功能。这两种容器都不能遍历，也没有迭代器。Stack的pop函数就通过调用deque的pop_back()函数。queue的相应函数也是通过调用deque的函数实现的。<br>所以相应的，其实stack和queue也可以用list作为它的底层。<br>Stack可以用vector作为他的底层，但是queue不可以，原因时vector无法提供pop_front函数。同理，这两种容器也不能使用map或者set作为他的底层。</p>
 <p><img src="https://ae01.alicdn.com/kf/H669e55b578004ce49c626dbd08087c07D.png" alt="image.png"><br><img src="https://ae01.alicdn.com/kf/H3d6ddba015f14d0aa81aa4d67f612c76u.png" alt="image.png"><br><img src="https://ae03.alicdn.com/kf/H332e4e195f884a3886c1dd45f4a7b7dcu.png" alt="image.png"><br><img src="https://ae04.alicdn.com/kf/H67ad2cf002344229bd4591f89efd58b6n.png" alt="image.png"></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 

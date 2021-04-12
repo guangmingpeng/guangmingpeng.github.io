@@ -467,8 +467,8 @@
 <p>其实除了在SpringMVC中有中文乱码的问题，在MyBatis中同样存在，一般是编码方式不统一导致的，大部分可以通过配置文件去解决，至于不能解决的那部分，只是我还没碰到罢了。</p>
 <h3 id="分门别类："><a href="#分门别类：" class="headerlink" title="分门别类："></a>分门别类：</h3><h4 id="1-要在web-xm中配置拦截器"><a href="#1-要在web-xm中配置拦截器" class="headerlink" title="1. 要在web.xm中配置拦截器"></a>1. 要在web.xm中配置拦截器</h4><p>注意web.xml的配置要遵守一定的顺叙,一个样例如下：</p>
 <pre><code>&lt;!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
+        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;
 &lt;web-app&gt;
   &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
 </code></pre><p> 配置路径，以使得监听器能去加载spring的配置文件applicationContext,配置好之后，就能在**tController类中使用依赖注入了</p>
@@ -534,34 +534,16 @@
 <p>这时spring配置中整合spring与mybatis的其中一段配置，这是配置连接池的，在url后面指定传输时的数据编码格式为utf8</p>
 <pre><code>
  &lt;!--配置连接池--&gt;
-&lt;bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
     &lt;!--配置四个属性--&gt;
-    &lt;property name="driverClass" value="com.mysql.jdbc.Driver"/&gt;
-    &lt;property name="jdbcUrl" value="jdbc:mysql:///ssm?characterEncoding=utf8"/&gt;
-    &lt;property name="user" value="root"/&gt;
-    &lt;property name="password" value=""/&gt;
+    &lt;property name=&quot;driverClass&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+    &lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:mysql:///ssm?characterEncoding=utf8&quot;/&gt;
+    &lt;property name=&quot;user&quot; value=&quot;root&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;&quot;/&gt;
 &lt;/bean&gt;
 </code></pre><h4 id="4-补充：Mybatis-中的中文乱码"><a href="#4-补充：Mybatis-中的中文乱码" class="headerlink" title="4. 补充：Mybatis 中的中文乱码"></a>4. 补充：Mybatis 中的中文乱码</h4><p>mybatis操作数据的乱码有两种，一是数据库本身插入中文就显示乱码，这个可以通过修改库或者表的编码格式进行修改或者在建表的时候就选择utf8的编码格式。</p>
 <p>第二种是mybatis传入中文数据到数据库，建库时设置了数据库默认字符集为UTF-8，通过mysql workbench直接插入中文显示完全正常。但是使用mybaits插入数据时，中文显示成了”???”这样的乱码。但从数据库获取的中文不会乱码。跟踪数据库操作，SQL语句中的中文还是显示正常的，但是插入到mysql数据库后就乱码了，于是判断可能是数据库连接的问题。后来在网上找了下资料，发现确实可以为mysql数据库的连接字符串设置编码方式，如下：</p>
-<pre><code>jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;amp;characterEncoding=utf8</code></pre><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<pre><code>jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;amp;characterEncoding=utf8</code></pre>
             </div>
             <hr/>
 

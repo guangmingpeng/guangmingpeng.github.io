@@ -479,7 +479,7 @@ id int primary key auto_increment,
 name varchar(20), 
 money double 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;</code></pre><h2 id="创建project"><a href="#创建project" class="headerlink" title="创建project"></a>创建project</h2><h4 id="1-建立一个空project（不是空的应该也没关系）"><a href="#1-建立一个空project（不是空的应该也没关系）" class="headerlink" title="1. 建立一个空project（不是空的应该也没关系）"></a>1. 建立一个空project（不是空的应该也没关系）</h4><p><img src="https://pic.rmb.bdstatic.com/bjh/27fd2e409caf09d66040deaf2613eaec.png" alt="image.png"></p>
-<h4 id="2-选中file-gt-new-建立一个新的module-框架即搭建在这个module中，其中SDK选择自己安装的那个"><a href="#2-选中file-gt-new-建立一个新的module-框架即搭建在这个module中，其中SDK选择自己安装的那个" class="headerlink" title="2. 选中file->new,建立一个新的module,框架即搭建在这个module中，其中SDK选择自己安装的那个"></a>2. 选中file-&gt;new,建立一个新的module,框架即搭建在这个module中，其中SDK选择自己安装的那个</h4><p><img src="https://pic.rmb.bdstatic.com/bjh/14ded4b6773ea40b6560d64d41b2a9e6.png" alt="image.png"></p>
+<h4 id="2-选中file-gt-new-建立一个新的module-框架即搭建在这个module中，其中SDK选择自己安装的那个"><a href="#2-选中file-gt-new-建立一个新的module-框架即搭建在这个module中，其中SDK选择自己安装的那个" class="headerlink" title="2. 选中file-&gt;new,建立一个新的module,框架即搭建在这个module中，其中SDK选择自己安装的那个"></a>2. 选中file-&gt;new,建立一个新的module,框架即搭建在这个module中，其中SDK选择自己安装的那个</h4><p><img src="https://pic.rmb.bdstatic.com/bjh/14ded4b6773ea40b6560d64d41b2a9e6.png" alt="image.png"></p>
 <p>对moudle进行命名和存放位置，注意父工程要设为none</p>
 <p><img src="https://pic.rmb.bdstatic.com/bjh/90ebcf3492a73b3d63bbf9e824934950.png" alt="image.png"></p>
 <p>选择自己maven安装的路径，不要用默认的，另外“user settings files”也要用自己安装的meven路径下的配置文件，同时注意local repository是否也是自己配置的文件夹。<br>解决maven创建过慢的问题，在添加Name：archetypeCatalog  Value：internal这一键值对，然后finish。</p>
@@ -703,11 +703,11 @@ public class Account implements Serializable{
     }
     @Override
     public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", money=" + money +
-                '}';
+        return &quot;Account{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, money=&quot; + money +
+                &#39;}&#39;;
     }
 }</code></pre><p>然后在dao包中定义一个AccountDao的接口，因为对于Mybatis来说，只要给他提供接口就行了，所以接口中提供要进行的数据操作即可，这里定义两个方法，一个是查询数据的findAll方法，一个是保存数据的save方法，代码如下：</p>
 <pre><code>
@@ -760,13 +760,13 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     @Override
     public List&lt;Account&gt; findAll() {
-        System.out.println("业务层在查询所有账户信息");
+        System.out.println(&quot;业务层在查询所有账户信息&quot;);
         return null;
     }
 
     @Override
     public void save(Account account) {
-        System.out.println("业务层在保存账户信息");
+        System.out.println(&quot;业务层在保存账户信息&quot;);
 
     }
 }</code></pre><p>接下来还要在controller层中定义相应类AccounController</p>
@@ -779,25 +779,25 @@ public class AccountController {
 <h2 id="配置spring"><a href="#配置spring" class="headerlink" title="配置spring"></a>配置spring</h2><h4 id="1-要配置spring，就要在resources目录下新建一个配置文件，可以取名“applicationContext-xml”，新建方法和配置内容如下："><a href="#1-要配置spring，就要在resources目录下新建一个配置文件，可以取名“applicationContext-xml”，新建方法和配置内容如下：" class="headerlink" title="1. 要配置spring，就要在resources目录下新建一个配置文件，可以取名“applicationContext.xml”，新建方法和配置内容如下："></a>1. 要配置spring，就要在resources目录下新建一个配置文件，可以取名“applicationContext.xml”，新建方法和配置内容如下：</h4><p><img src="https://pic.rmb.bdstatic.com/bjh/558f3c3f8ba884d146caa8dee66bc332.png" alt="image.png"></p>
 <p>新建时，可能会出现没有“spring config”那个选项，解决办法：</p>
 <p>配置文件内容如下：</p>
-<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context
    http://www.springframework.org/schema/context/spring-context.xsd
    http://www.springframework.org/schema/aop
    http://www.springframework.org/schema/aop/spring-aop.xsd
    http://www.springframework.org/schema/tx
-   http://www.springframework.org/schema/tx/spring-tx.xsd"&gt;
+   http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;
     &lt;!--开启注解的扫描,但是只希望spring扫描dao层
     和service的注解，controller的注解由springMVC来负责，所以需要exclude掉有controller的注解--&gt;
-    &lt;context:component-scan base-package="guang.fram"&gt;
+    &lt;context:component-scan base-package=&quot;guang.fram&quot;&gt;
         &lt;!--配置不需要spring扫描的注解--&gt;
-        &lt;context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/&gt;
+        &lt;context:exclude-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
     &lt;/context:component-scan&gt;
 
 &lt;/beans&gt;</code></pre><p>配置好之后，就可以使用注解来使用对象了，所以在AccountServiceImpl这个类前加service注解了<br>代码变成：</p>
@@ -809,17 +809,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("accountService")
+@Service(&quot;accountService&quot;)
 public class AccountServiceImpl implements AccountService {
     @Override
     public List&lt;Account&gt; findAll() {
-        System.out.println("业务层在查询所有账户信息");
+        System.out.println(&quot;业务层在查询所有账户信息&quot;);
         return null;
     }
 
     @Override
     public void save(Account account) {
-        System.out.println("业务层在保存账户信息");
+        System.out.println(&quot;业务层在保存账户信息&quot;);
 
     }
 }</code></pre><h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><p>接下来可在test包下新建TestSpring类来进行测试，测试代码如下，注意在这里使用test的注解，需要在pom.xml中配置juint的scope为compile，而不是test，具体请见pom.xml的相关配置：</p>
@@ -839,10 +839,10 @@ public class TestSpring {
          * */
 
         //加载配置文件
-ApplicationContext ac = new ClassPathXmlApplicationContext( "classpath:applicationContext.xml" );
+ApplicationContext ac = new ClassPathXmlApplicationContext( &quot;classpath:applicationContext.xml&quot; );
 
         //获取对象,(获取的对象需要强转为相应的类型)
-        AccountService as = (AccountService) ac.getBean("accountService");
+        AccountService as = (AccountService) ac.getBean(&quot;accountService&quot;);
 
         //调用方法
         as.findAll();
@@ -859,8 +859,8 @@ log4j:WARN Please initialize the log4j system properly.</code></pre><p>原因是
 <p><strong>至此，单独的spring已经可以正常工作，接下来考虑配置springmvc以及整合spring和springmvc</strong></p>
 <h2 id="配置SpringMVC"><a href="#配置SpringMVC" class="headerlink" title="配置SpringMVC"></a>配置SpringMVC</h2><p>Web的配置在webapp\WEB-INF\web.xml文件中，web-inf这个目录是web的内部访问的目录，浏览器是无法访问到里面的资源的，web.xml则用来写web项目的配置文件，在里面需要配置前端控制器，过滤器（解决中文乱码问题）以及加载springmvc的配置文件。注意，web.xml书写的内容，各个部分是要遵循一定顺叙的，否则会报错，比如filter在第二个部分，代码如下：</p>
 <pre><code>&lt;!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
+        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;
 
 &lt;web-app&gt;
 
@@ -918,36 +918,36 @@ log4j:WARN Please initialize the log4j system properly.</code></pre><p>原因是
 <li>开启springMVC注解的支持</li>
 </ol>
 <pre><code>
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd"&gt;
+        http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
 &lt;!--开启注解扫描。只扫描是Controller的注解,所以用include（注意与spring的xml的配置对应）--&gt;
-    &lt;context:component-scan base-package="guang.fram"&gt;
-        &lt;context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/&gt;
+    &lt;context:component-scan base-package=&quot;guang.fram&quot;&gt;
+        &lt;context:include-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
     &lt;/context:component-scan&gt;
 
 
     &lt;!--配置视图解析器对象--&gt;
-    &lt;bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+    &lt;bean id=&quot;internalResourceViewResolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
             &lt;!--配置前缀和后缀--&gt;
         &lt;!--web-info的pages目录下的文件，所以需要在WEB-INF下新建pages文件夹--&gt;
-        &lt;property name="prefix" value="/WEB-INF/pages/"/&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/pages/&quot;/&gt;
         &lt;!--后缀名为.jsp的文件--&gt;
-        &lt;property name="suffix" value=".jsp"/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
     &lt;/bean&gt;
 
     &lt;!--过滤静态资源（即静态资源不进行拦截？？）--&gt;
-    &lt;mvc:resources location="/css/" mapping="/css/**" /&gt;
-    &lt;mvc:resources location="/images/" mapping="/images/**" /&gt;
-    &lt;mvc:resources location="/js/" mapping="/js/**" /&gt;
+    &lt;mvc:resources location=&quot;/css/&quot; mapping=&quot;/css/**&quot; /&gt;
+    &lt;mvc:resources location=&quot;/images/&quot; mapping=&quot;/images/**&quot; /&gt;
+    &lt;mvc:resources location=&quot;/js/&quot; mapping=&quot;/js/**&quot; /&gt;
 
     &lt;!--开启springMVC注解的支持--&gt;
     &lt;mvc:annotation-driven/&gt;
@@ -960,7 +960,7 @@ log4j:WARN Please initialize the log4j system properly.</code></pre><p>原因是
   Time: 16:32
   To change this template use File | Settings | File Templates.
 --%&gt;
-&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
 &lt;html&gt;
 &lt;%--先delete掉原来的index.jsp文件，然后new一个--%&gt;
 
@@ -969,7 +969,7 @@ log4j:WARN Please initialize the log4j system properly.</code></pre><p>原因是
 &lt;/head&gt;
 &lt;body&gt;
 &lt;%--href后的account为一级目录，findAll为标签定义好此标签后，然后到controller包下的AccountController方法中定义findAll方法--%&gt;
-&lt;a href="account/findAll"&gt;测试测试测试测试查询数据的数据&lt;/a&gt;
+&lt;a href=&quot;account/findAll&quot;&gt;测试测试测试测试查询数据的数据&lt;/a&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>这里的account/findAll，前面account是虚拟路径，findAll是资源路径，也即是servlet的路径，但是在springMVC里边用的是注解的形式。所以接下来修改在controller包下的AccountController类的内容，变成如下：</p>
 <pre><code>package guang.fram.controller;
@@ -982,26 +982,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 * 的href，下面的return返回值是跳转页面的文件名，这些跳转页面放在web-inf目录下的
 * 自建的pages文件夹中，并且要在springMVC.xml中配置视图解析器对象，即：
 * &lt;!--配置视图解析器对象--&gt;
-    &lt;bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+    &lt;bean id=&quot;internalResourceViewResolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
             &lt;!--配置前缀和后缀--&gt;
         &lt;!--web-info的pages目录下的文件--&gt;
-        &lt;property name="prefix" value="/WEB-INF/pages/"/&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/pages/&quot;/&gt;
         &lt;!--后缀名为.jsp的文件--&gt;
-        &lt;property name="suffix" value=".jsp"/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
     &lt;/bean&gt;
 * 以使得它能根据目录找到文件
 * */
 @Controller
-@RequestMapping("/account")
+@RequestMapping(&quot;/account&quot;)
 public class AccountController {
-    @RequestMapping("/findAll")
+    @RequestMapping(&quot;/findAll&quot;)
     public String findAll() {
-        System.out.println("表现层在查询所有的账户信息");
+        System.out.println(&quot;表现层在查询所有的账户信息&quot;);
 //controller把数据存到这个域对象里边去了，然后通过下面的return转发到list.jsp页面
         //所以可以在该页面对list的数据做操作，比如遍历之类的
 
         //下面这句话的意思是往webapp目录下的pages目录里的list.jsp页面跳转,
-        return "list";
+        return &quot;list&quot;;
     }
 }</code></pre><p>由于要往pages文件夹下的list.jsp跳转，所以在该文件夹下新建list.jsp页面，内容如下：</p>
 <pre><code>&lt;%--
@@ -1011,7 +1011,7 @@ public class AccountController {
   Time: 15:16
   To change this template use File | Settings | File Templates.
 --%&gt;
-&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Title&lt;/title&gt;
@@ -1043,8 +1043,8 @@ public class AccountController {
 <p>但还有个问题是该监听器默认只加载WEB-INF目录下的applicationContext.xml配置文件，而spring的配置文件放在了resources目录下，因此该listener找不到，所以还需要在web.xml中配置其路径。</p>
 <p>所以，将原来的web.xml文件修改为如下，红色部分即新添内容，之所以放在不同位置，是因为要遵循web.xml的书写顺叙：</p>
 <pre><code>&lt;!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
+        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;
 
 &lt;web-app&gt;
 
@@ -1118,19 +1118,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping(&quot;/account&quot;)
 public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/findAll")
+    @RequestMapping(&quot;/findAll&quot;)
     public String findAll() {
-        System.out.println("表现层在查询所有的账户信息");
+        System.out.println(&quot;表现层在查询所有的账户信息&quot;);
 
         accountService.findAll();//这里调用的方法时service层里边的
 
         //下面这句话的意思是往webapp目录下的pages目录里的list.jsp页面跳转,
-        return "list";
+        return &quot;list&quot;;
     }
 }</code></pre><p>此时再启动服务器，当点击页面链接时，即会调用controller中的findAll方法，控制台会输出System.out.println(“表现层在查询所有的账户信息”); 而findAll方法中，又有accountService.findAll();它会调用到AccountService里的findAll方法，所以此时控制台应该输出两句话，如下：</p>
 <p><img src="https://pic.rmb.bdstatic.com/bjh/ae29cf787bb46f5183190425f3da91b3.png" alt="image.png"></p>
@@ -1150,36 +1150,36 @@ public interface AccountDao {
 
 
         //获取所有账户
-        @Select("select * from account")
+        @Select(&quot;select * from account&quot;)
         public List&lt;Account&gt; findAll();
         //保存账户信息
-        @Insert("insert into account (name,money) value (#{name},#{money})")
+        @Insert(&quot;insert into account (name,money) value (#{name},#{money})&quot;)
         public void saveAccount(Account account);
     }</code></pre><ol start="2">
 <li>接下来在resources目录下创建配置文件SqlMapConfig.xml，右键resources–&gt;选择”file”–&gt;命名为：SqlMapConfig.xml。配置文件内容如下：</li>
 </ol>
-<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
 &lt;configuration&gt;
     &lt;!--两大部分，1. 配置环境 2. 引入映射配置文件--&gt;
 
     &lt;!-- 配置连接数据库的信息 --&gt;
-    &lt;properties resource="jdbcConfig.properties"&gt;&lt;/properties&gt;
+    &lt;properties resource=&quot;jdbcConfig.properties&quot;&gt;&lt;/properties&gt;
 
     &lt;!--配置环境--&gt;
-    &lt;environments default="mysql"&gt;
-        &lt;environment id="mysql"&gt;
+    &lt;environments default=&quot;mysql&quot;&gt;
+        &lt;environment id=&quot;mysql&quot;&gt;
             &lt;!-- 配置事务管理 --&gt;
-            &lt;transactionManager type="JDBC"&gt;&lt;/transactionManager&gt;
-            &lt;dataSource type="POOLED"&gt;
-                &lt;property name="driver" value="${jdbc.driver}"/&gt;
+            &lt;transactionManager type=&quot;JDBC&quot;&gt;&lt;/transactionManager&gt;
+            &lt;dataSource type=&quot;POOLED&quot;&gt;
+                &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driver}&quot;/&gt;
                 &lt;!--注意url这个属性是连接自己的数据库，所以在配置文件中是这个值：jdbc.url=jdbc:mysql://localhost:3306/ssm
                 上面地址3306后面是database的名字，此外，下面的${}这种形式的是通过配置文件读取相应值的方式，配置文件放在了resources目录下，文件名为：jdbcConfig.properties，但是url这个属性在ssm的后面需要添加?useUnicode=true&amp;amp;characterEncoding=utf8以解决传输时，出现中文乱码的问题--&gt;
-                &lt;property name="url" value="jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;amp;characterEncoding=utf8"/&gt;
-                &lt;property name="username" value="${jdbc.username}"/&gt;
-                &lt;property name="password" value="${jdbc.password}"/&gt;
+                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;amp;characterEncoding=utf8&quot;/&gt;
+                &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot;/&gt;
+                &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
 
             &lt;/dataSource&gt;
 
@@ -1191,11 +1191,11 @@ public interface AccountDao {
     要注意两个路径开始的开始位置，取全限定名就没问题--&gt;
     &lt;mappers&gt;
         &lt;!--第一种方法
-        &lt;mapper class="guang.fram.dao.AccountDao"/&gt;
+        &lt;mapper class=&quot;guang.fram.dao.AccountDao&quot;/&gt;
         --&gt;
 
         &lt;!--第二种方法，如果还有其他的包需要扫描，则可以继续添加到下面--&gt;
-        &lt;package name="guang.fram.dao"/&gt;
+        &lt;package name=&quot;guang.fram.dao&quot;/&gt;
     &lt;/mappers&gt;
 &lt;/configuration&gt;</code></pre><ol start="3">
 <li>接下来在test包中新建一个testMybatis类来测试mybatis是否配置成功，使用mybatis过程及代码如下：</li>
@@ -1235,7 +1235,7 @@ public class testMybatis {
       * */
 
         //加载配置文件(定义Resources的时候选用org.apache.ibatis.io那一个),并将抛出的异常改为Exception
-        InputStream in = Resources.getResourceAsStream("SqlMapConfig.xml");
+        InputStream in = Resources.getResourceAsStream(&quot;SqlMapConfig.xml&quot;);
 
         //创建SqlSessionFactory对象
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
@@ -1263,7 +1263,7 @@ public class testMybatis {
     public void run2() throws Exception {
 
 
-        InputStream in = Resources.getResourceAsStream("SqlMapConfig.xml");
+        InputStream in = Resources.getResourceAsStream(&quot;SqlMapConfig.xml&quot;);
 
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
 
@@ -1273,7 +1273,7 @@ public class testMybatis {
 
         //用此代理对象可以操作相应接口中（AccountDao）的所有方法
         Account ac = new Account();
-        ac.setName("崔八");
+        ac.setName(&quot;崔八&quot;);
         ac.setMoney(1000.0);
         dao.saveAccount(ac);
         //提交事务
@@ -1300,22 +1300,22 @@ public class testMybatis {
     3. 配置AccountDao所在的包，因为要通过这些包，让spring知道创建哪些接口的对象
     --&gt;
     &lt;!--配置连接池--&gt;
-   &lt;bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"&gt;
+   &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
        &lt;!--配置四个属性--&gt;
-       &lt;property name="driverClass" value="com.mysql.jdbc.Driver"/&gt;
+       &lt;property name=&quot;driverClass&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
 &lt;!--下面的url同样要注意在ssm的后面加上”?characterEncoding=utf8”,防止传输时出现中文乱码--&gt;
-       &lt;property name="jdbcUrl" value="jdbc:mysql:///ssm?characterEncoding=utf8"/&gt;
-       &lt;property name="user" value="root"/&gt;
-       &lt;property name="password" value=""/&gt;
+       &lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:mysql:///ssm?characterEncoding=utf8&quot;/&gt;
+       &lt;property name=&quot;user&quot; value=&quot;root&quot;/&gt;
+       &lt;property name=&quot;password&quot; value=&quot;&quot;/&gt;
    &lt;/bean&gt;
     &lt;!--配置工厂--&gt;
-&lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
+&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
     &lt;!--再引入上面常见的datasource--&gt;
-    &lt;property name="dataSource" ref="dataSource"/&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
 &lt;/bean&gt;
     &lt;!--配置dao接口所在的包--&gt;
-    &lt;bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;
-        &lt;property name="basePackage" value="guang.fram.dao"/&gt;
+    &lt;bean id=&quot;mapperScanner&quot; class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;guang.fram.dao&quot;/&gt;
     &lt;/bean&gt;
     &lt;!--配置好之后，可以删掉SqlMapConfig.xml了，然后在AccountDao.java的接口前面加上@Repository的注解--&gt;
 </code></pre><p>配置好之后，可以删掉SqlMapConfig.xml了（不删也不影响），然后在AccountDao.java的接口前面加上@Repository的注解，加上这个注解之后，意味着这个接口交给spring进行管理了，就可以到AccountServiceImpl里面注入这个接口并使用了。<br>AccountDao接口变成了如下：</p>
@@ -1344,10 +1344,10 @@ import java.util.List;
 public interface AccountDao {
 
     //获取所有账户
-    @Select("select * from account")
+    @Select(&quot;select * from account&quot;)
     public List&lt;Account&gt; findAll();
     //保存账户信息
-    @Insert("insert into account (name,money) value (#{name},#{money})")
+    @Insert(&quot;insert into account (name,money) value (#{name},#{money})&quot;)
     public void saveAccount(Account account);
 }
 </code></pre><p>然后进入到AccoutServiceImpl.java这个类，进行注入并使用，因为之前该类中的findAll方法和save方法只是做了一个简单的输出，而现在那个类也可以使用mybatis的代理对象了，所以她的findAll方法就可以通过这个代理对象去实际的操作数据库，该类变成如下：</p>
@@ -1368,14 +1368,14 @@ import java.util.List;
 * 这个service的类要交给spring的ioc进行管理，先要对resources目录下的配置文件配置spring进行注解的
 * 扫描
 * */
-@Service("accountService")
+@Service(&quot;accountService&quot;)
 public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDao accountDao;
 
     @Override
     public List&lt;Account&gt; findAll() {
-        System.out.println("业务层在查询所有账户信息");
+        System.out.println(&quot;业务层在查询所有账户信息&quot;);
         //return null;
 
         //使用spring整合mybatis之后，通过ioc得到的accountDao来调用
@@ -1384,7 +1384,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void saveAccount(Account account) {
-        System.out.println("业务层在保存账户信息");
+        System.out.println(&quot;业务层在保存账户信息&quot;);
 
         //使用spring整合mybatis之后，通过ioc得到的accountDao来调用
         accountDao.saveAccount(account);
@@ -1412,48 +1412,48 @@ import java.util.List;
 * 自建的pages文件夹中，并且要在springMVC.xml中配置视图解析器对象，即：
 * 
 * &lt;!--配置视图解析器对象--&gt;
-    &lt;bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+    &lt;bean id=&quot;internalResourceViewResolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
             &lt;!--配置前缀和后缀--&gt;
         &lt;!--web-info的pages目录下的文件--&gt;
-        &lt;property name="prefix" value="/WEB-INF/pages/"/&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/pages/&quot;/&gt;
         &lt;!--后缀名为.jsp的文件--&gt;
-        &lt;property name="suffix" value=".jsp"/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
     &lt;/bean&gt;
 * 以使得它能根据目录找到文件
 * */
 @Controller
-@RequestMapping("/account")
+@RequestMapping(&quot;/account&quot;)
 public class AccountController {
 
     /*在web.xml中配置好监听器之后，就整合好了spring与springmvc，就可以在这个类中使用依赖注入了*/
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/findAll")
+    @RequestMapping(&quot;/findAll&quot;)
     public String findAll(Model model){
-        System.out.println("表现层在查询所有的账户信息");
+        System.out.println(&quot;表现层在查询所有的账户信息&quot;);
 
         //下面这个是使用了spring的依赖注入后生成的对象所调用的service里面的方法
         List&lt;Account&gt; list = accountService.findAll();
 
 
         //然后在上面的findAll的参数表里边用一个Moudel对象，将数据存入一个键值对里边
-        model.addAttribute("list",list);
+        model.addAttribute(&quot;list&quot;,list);
 
         //controller把数据存到这个域对象里边去了，然后通过下面的return转发到list.jsp页面
         //所以可以在该页面对list的数据做操作，比如遍历之类的
 
         //下面这句话的意思是往webapp目录下的pages目录里的list.jsp页面跳转,
-        return "list";
+        return &quot;list&quot;;
     }
 
     //页面提交的数据保存到数据库的功能
-    @RequestMapping("/save")
+    @RequestMapping(&quot;/save&quot;)
     //从页面提交拿到的数据，要先封装，可以直接在参数列表中定义一个Account对象，会自动将传入的参数封装到此对象中
     //然后直接使用spring管理的对象accountService直接调用save方法就可以了
     public String save(Account account){
         accountService.save(account);
-        return "list";
+        return &quot;list&quot;;
     }
 }
 </code></pre><p>修改list.jsp页面为如下：</p>
@@ -1466,9 +1466,9 @@ public class AccountController {
 --%&gt;
 
 &lt;%--用El,所以下面这句最后要加上那一句--%&gt;
-&lt;%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; isELIgnored=&quot;false&quot; %&gt;
 &lt;%--引入jstl的标签库--%&gt;
-&lt;%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
+&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
 
 &lt;html&gt;
 &lt;head&gt;
@@ -1478,7 +1478,7 @@ public class AccountController {
 &lt;h3&gt;表现层查询了所有的账户信息，这是从controller包下的AccountController类里的findAll方法跳转来的&lt;/h3&gt;
 
 &lt;%--对传过来的list进行迭代,items属性值的是要遍历的集合，var是给集合中变量的命名--%&gt;
-&lt;c:forEach items="${list}" var="account"&gt;
+&lt;c:forEach items=&quot;${list}&quot; var=&quot;account&quot;&gt;
 ${account.name}
     ${account.money}
 &lt;/c:forEach&gt;
@@ -1499,20 +1499,20 @@ ${account.name}
     &lt;!--配置分三部分：1.配置事务管理器   2. 配置事务通知   3. 配置AOP增强--&gt;
 
     &lt;!--1.配置事务管理器--&gt;
-    &lt;bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
         &lt;!--需要传入连接池这个引用--&gt;
-        &lt;property name="dataSource" ref="dataSource"/&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
 
     &lt;/bean&gt;
 
     &lt;!--2. 配置事务通知,将上面的事务管理器传进来--&gt;
-    &lt;tx:advice id="txAdvice" transaction-manager="transactionManager"&gt;
+    &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
         &lt;!--配置事务的属性，比如隔离级别，以及哪些方法配置事务通知--&gt;
         &lt;tx:attributes&gt;
             &lt;!--将带有find的方法设置为read-only级别--&gt;
-            &lt;tx:method name="find" read-only="true"/&gt;
+            &lt;tx:method name=&quot;find&quot; read-only=&quot;true&quot;/&gt;
             &lt;!--将其他的方法的隔离级别设置为默认--&gt;
-            &lt;tx:method name="*" isolation="DEFAULT"/&gt;
+            &lt;tx:method name=&quot;*&quot; isolation=&quot;DEFAULT&quot;/&gt;
         &lt;/tx:attributes&gt;
     &lt;/tx:advice&gt;
 
@@ -1523,7 +1523,7 @@ ${account.name}
 
 
     &lt;aop:config&gt;
-&lt;aop:advisor advice-ref="txAdvice" pointcut="execution(* guang.fram.service.impl.*ServiceImpl.*(..))"/&gt;
+&lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut=&quot;execution(* guang.fram.service.impl.*ServiceImpl.*(..))&quot;/&gt;
     &lt;/aop:config&gt;
 </code></pre><p>配置好之后，则需要从页面中提交数据，然后看是否能保存到数据库中，其具体的执行过程是，调用cotroller中的save方法，而它里面调用了AccountServiceImpl的save方法，这个save方法里面又有AccountDao的代理对象，它可以调用dao的save方法，即将数据保存到数据库中。<br>要从页面提交数据，则需要在index.jsp中先写一个表单，index.jsp修改后如下：</p>
 <pre><code>&lt;%--
@@ -1533,7 +1533,7 @@ ${account.name}
   Time: 16:32
   To change this template use File | Settings | File Templates.
 --%&gt;
-&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
 &lt;html&gt;
 &lt;%--先delete掉原来的index.jsp文件，然后new一个--%&gt;
 
@@ -1543,14 +1543,14 @@ ${account.name}
 &lt;body&gt;
 &lt;%--href后的account为一级目录，findAll为标签
 定义好此标签后，然后到controller包下的AccountController方法中定义findAll方法--%&gt;
-&lt;a href="account/findAll"&gt;测试测试测试测试查询数据的数据&lt;/a&gt;
+&lt;a href=&quot;account/findAll&quot;&gt;测试测试测试测试查询数据的数据&lt;/a&gt;
 
 
 &lt;%--测试保存数据，action表示请求路径，要在AccountController中提供相应的访问路径和方法--%&gt;
-&lt;form action="account/save" method="post"&gt;
-    姓名 &lt;input type="text" name="name"/&gt; &lt;br/&gt;
-    金额 &lt;input type="text" name="money"/&gt; &lt;br/&gt;
-    &lt;input type="submit" value="保存"&gt;
+&lt;form action=&quot;account/save&quot; method=&quot;post&quot;&gt;
+    姓名 &lt;input type=&quot;text&quot; name=&quot;name&quot;/&gt; &lt;br/&gt;
+    金额 &lt;input type=&quot;text&quot; name=&quot;money&quot;/&gt; &lt;br/&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;保存&quot;&gt;
 &lt;/form&gt;
 
 &lt;/body&gt;
@@ -1569,32 +1569,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 @Controller
-@RequestMapping("/account")
+@RequestMapping(&quot;/account&quot;)
 public class AccountController {
 
     /*在web.xml中配置好监听器之后，就整合好了spring与springmvc，就可以在这个类中使用依赖注入了*/
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/findAll")
+    @RequestMapping(&quot;/findAll&quot;)
     public String findAll(Model model){
-        System.out.println("表现层在查询所有的账户信息");
+        System.out.println(&quot;表现层在查询所有的账户信息&quot;);
 
         //下面这个是使用了spring的依赖注入后生成的对象所调用的service里面的方法
         List&lt;Account&gt; list = accountService.findAll();
 
         //然后在上面的findAll的参数表里边用一个Moudel对象，将数据存入一个键值对里边
-        model.addAttribute("list",list);
-        return "list";
+        model.addAttribute(&quot;list&quot;,list);
+        return &quot;list&quot;;
     }
 
     //页面提交的数据保存到数据库的功能
-    @RequestMapping("/save")
+    @RequestMapping(&quot;/save&quot;)
     //从页面提交拿到的数据，要先封装，可以直接在参数列表中定义一个Account对象，会自动将传入的参数封装到此对象中
     //然后直接使用spring管理的对象accountService直接调用save方法就可以了
     public String save(Account account){
         accountService.saveAccount(account);
-        return "list";
+        return &quot;list&quot;;
     }
 
 }</code></pre><p>至此，所有的整合完毕，再次启动服务器进行测试，启动后，页面如下，并填入数据：</p>
@@ -1610,30 +1610,12 @@ public class AccountController {
 public String save(Account account, HttpServletRequest request, HttpServletResponse response) throws Exception {
      accountService.save(account);
      //重定向到findAll那个servlet去，这样跳转的list页面里就会把数据库的数据也显示出来了
-     response.sendRedirect(request.getContextPath()+"/account/findAll");
-     return "list";
+     response.sendRedirect(request.getContextPath()+&quot;/account/findAll&quot;);
+     return &quot;list&quot;;
  }</code></pre><p>使用这个save方法，点击”保存”后，跳转的页面是这样的</p>
 <p><img src="https://pic.rmb.bdstatic.com/bjh/ca3ef6f2d1552194f7c915da4ceaf174.png" alt="image.png"></p>
 <p>至此，所有的整合完毕，ssm框架已经搭建好了。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 

@@ -479,10 +479,10 @@
         this(cpu, ram, 0);
     }
     public Computer(String cpu, String ram, int usbCount) {
-        this(cpu, ram, usbCount, "罗技键盘");
+        this(cpu, ram, usbCount, &quot;罗技键盘&quot;);
     }
     public Computer(String cpu, String ram, int usbCount, String keyboard) {
-        this(cpu, ram, usbCount, keyboard, "三星显示器");
+        this(cpu, ram, usbCount, keyboard, &quot;三星显示器&quot;);
     }
     public Computer(String cpu, String ram, int usbCount, String keyboard, String display) {
         this.cpu = cpu;
@@ -567,9 +567,9 @@
 }</code></pre></li>
 </ul>
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>在客户端使用链式调用，一步一步的把对象构建出来。</p>
-<pre><code>Computer computer=new Computer.Builder("因特尔","三星")
-                .setDisplay("三星24寸")
-                .setKeyboard("罗技")
+<pre><code>Computer computer=new Computer.Builder(&quot;因特尔&quot;,&quot;三星&quot;)
+                .setDisplay(&quot;三星24寸&quot;)
+                .setKeyboard(&quot;罗技&quot;)
                 .setUsbCount(2)
                 .build();</code></pre><h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>构建者模式是一个非常实用而常见的创建类型的模式（creational design pattern)，例如图片处理框架Glide，网络请求框架Retrofit等都使用了此模式。</p>
 <p>在我使用的过程中，是设置蓝牙过滤器时使用到ScanFilter这个类：</p>
@@ -632,7 +632,7 @@ public static final class Builder {
 
         public Builder setDeviceAddress(String deviceAddress) {
             if (deviceAddress != null &amp;&amp; !BluetoothAdapter.checkBluetoothAddress(deviceAddress)) {
-                throw new IllegalArgumentException("invalid device address " + deviceAddress);
+                throw new IllegalArgumentException(&quot;invalid device address &quot; + deviceAddress);
             }
             mDeviceAddress = deviceAddress;
             return this;
@@ -666,25 +666,7 @@ A.C c=a.new C();</code></pre></li>
 </ol>
 <p><strong>在建造者模式中使用静态内部类的原因:</strong></p>
 <p>静态内部类相当于是一个独立的类，但是如果某个类A只想被类B使用，则可以把A作为静态内部类放到B中，这样就能B.A.method()这样去使用了，相当于在A的前面加了一个限定符，避免A放在外面时，被其他类所依赖。同时，在外部类没有初始化时，同样可以初始化静态内部类，如上面的做法。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -916,56 +898,9 @@ A.C c=a.new C();</code></pre></li>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
-            <div class="card">
-                <a href="/2020/08/02/she-ji-mo-shi-zhi-jian-zao-zhe-mo-shi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="设计模式之建造者模式">
-                        
-                        <span class="card-title">设计模式之建造者模式</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            设计模式之建造者模式在java中实例化某个类的对象时，我们会经常碰到 **bulider 这样的形式，这其实是使用的就是建造者模式。但是为什么不直接用普通的方法去实例化，而要这么绕一下呢？这种情况我觉得在设计模式中经常遇到，比如工厂模式也是
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-02
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            风雪夜归人
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">设计模式</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/2020/08/02/xue-xi-zi-liao-zheng-li/">
                     <div class="card-image">
@@ -982,15 +917,13 @@ A.C c=a.new C();</code></pre></li>
                             
 LeetCode题解汇总题解预览地址：https://leetcode.wang
 Android常用颜色、图标 https://www.materialpalette.com/
-
-
-        document.querySelect
+Android知识答主，https://www.jiansh
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-02
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-02
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1004,6 +937,52 @@ Android常用颜色、图标 https://www.materialpalette.com/
                     
                     <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">
                         <span class="chip bg-color">学习资料</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/07/25/she-ji-mo-shi-zhi-guan-cha-zhe-mo-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="设计模式之观察者模式">
+                        
+                        <span class="card-title">设计模式之观察者模式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            设计模式之观察者模式因为前段时间在公司项目中一个场景下需要用到观察者模式，所以在此做一个记录。
+我遇到的问题是，在一个参数设置页面设置参数后，需要其它依赖这个参数的对象同时更新这些参数，如果采用后者不断去轮询的方式，一来消耗性能，二来也不能
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            风雪夜归人
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>
